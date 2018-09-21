@@ -1,1 +1,1 @@
-web: python mylinebot.py
+web gunicorn mylinebot:app
