@@ -430,14 +430,13 @@ def generateTempJSON(param,startTime):
     },
     "footer": {
       "type": "box",
-      "layout": "vertical",
+      "layout": "horizontal",
       "spacing": "sm",
       "contents": [
-       
         {
           "type": "text",
           "text": "data from lugia at",
-          "size": "xs",
+          "size": "xxs",
           "color": "#aaaaaa",
           "flex": 0
         },
@@ -445,10 +444,9 @@ def generateTempJSON(param,startTime):
           "type": "text",
           "text": "{timestamp}",
           "color": "#aaaaaa",
-          "size": "xs",
+          "size": "xxs",
           "align": "end"
-        }
-        
+        }        
       ],
       "flex": 0
     }
@@ -536,7 +534,7 @@ def generateHomeJSON():
                 "style": "primary",
                 "action": {
                   "type": "message",
-                  "label": "Finance",
+                  "label": "匯率 股票",
                   "Text": "Finance"
                 }
               },
@@ -545,7 +543,7 @@ def generateHomeJSON():
                 "style": "primary",
                 "action": {
                     "type": "message",
-                    "label": "Status",
+                    "label": "家裡溫濕度",
                     "Text": "Status"
                 }
               }
@@ -561,8 +559,8 @@ def generateHomeJSON():
                 "style": "primary",
                 "action": {
                   "type": "message",
-                  "label": "Schedule",
-                  "Text": "Schedule"
+                  "label": "主目錄",
+                  "Text": "Menu"
                 }
               },
               {

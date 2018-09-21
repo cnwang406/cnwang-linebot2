@@ -176,9 +176,9 @@ def handle_message(event):
   print ('now, keyword=',keyword)
   if keyword==u'Finance' or keyword==u'Stock':
     processStock(event.reply_token, replyUserStr)
-  elif keyword==u'Status':
+  elif keyword==u'Temp':
     processStatus(event.reply_token)
-  elif keyword==u'Schedule':
+  elif keyword==u'Menu':
     processHOME(event.reply_token)
     #line_bot_api.reply_message(, FlexSendMessage('test',json.loads(sendHOME())))
   elif keyword.upper() == 'PROFILE':
