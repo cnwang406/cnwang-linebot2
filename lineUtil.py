@@ -430,26 +430,13 @@ def generateTempJSON(param,startTime):
     },
     "footer": {
       "type": "box",
-      "layout": "horizontal",
+      "layout": "vertical",
       "spacing": "sm",
       "contents": [
+       
         {
           "type": "text",
-          "text": "data source : ",
-          "size": "xs",
-          "color": "#aaaaaa",
-          "flex": 0
-        },
-        {
-          "type": "text",
-          "text": "blynk server@lugia",
-          "color": "#aaaaaa",
-          "size": "xs",
-          "align": "end"
-        },
-        {
-          "type": "text",
-          "text": "generated at ",
+          "text": "data from lugia at",
           "size": "xs",
           "color": "#aaaaaa",
           "flex": 0
