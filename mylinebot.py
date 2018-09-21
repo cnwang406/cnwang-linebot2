@@ -4,7 +4,7 @@ TITLE=(
 """
 ***************************************************
 **                                               **
-**      Line Bot  V0.22                          **
+**      Line Bot  V0.23                          **
 **                cnwang. 2018/09                **
 ***************************************************
 
@@ -59,10 +59,10 @@ startTime=time.time()
 print(TITLE)
 
 #main start here
-token='WMKL9EQXMJ48ZgHD79wR3FJ800N7fOfYoq2X0OXcn1FOphbxOdKt7r/GYQ7grI+MVx7mB6kh6/6j6P2OxjBlQX6FmLacktBQc1q09r5JyUVCgt2GDK4UyI9nHeRvlDPU8v20xxSoWCiuzGJdwDMj2wdB04t89/1O/w1cDnyilFU='
-uid='U769b97b52c66fec77eb598a6223f30a3'
+lineToken='WMKL9EQXMJ48ZgHD79wR3FJ800N7fOfYoq2X0OXcn1FOphbxOdKt7r/GYQ7grI+MVx7mB6kh6/6j6P2OxjBlQX6FmLacktBQc1q09r5JyUVCgt2GDK4UyI9nHeRvlDPU8v20xxSoWCiuzGJdwDMj2wdB04t89/1O/w1cDnyilFU='
+lineUid='U769b97b52c66fec77eb598a6223f30a3'
 channelSecret='f5aa158a43b2f6ee60674dd17a24c5ff'
-line_bot_api = LineBotApi(token)
+line_bot_api = LineBotApi(lineToken)
 handler = WebhookHandler(channelSecret)
 
 
@@ -85,30 +85,30 @@ par = [currency,stock]
 #t=fitFlex2('0','0','0','0','0')
 #print (t)
 
-pHeader = u'訊息中心'
-pTitle = u'汪汪的訊息'
-pAddress = 'cnwang406@gmail.com'
-pDate=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+stockHeader = u'匯率股票訊息'
+stockTitle = u' 問的'
+stockAddress = 'cnwang406@gmail.com'
+#pDate=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 
-def processStock(reply):
+def processStock(reply, username):
   startTime=time.time()
   getPrice(par)
   if reply=='' :
-    line_bot_api.push_message(uid, FlexSendMessage('Stock message is here', json.loads(generateStockJSON(pHeader,pTitle,pAddress,par,startTime))))
+    line_bot_api.push_message(lineUid, FlexSendMessage('Stock message is here', json.loads(generateStockJSON(stockHeader,u'小汪汪'+stockTitle,stockAddress,par,startTime))))
   else:
-    line_bot_api.reply_message(reply, FlexSendMessage('Stock message is here', json.loads(generateStockJSON(pHeader,pTitle,pAddress,par,startTime))))
+    line_bot_api.reply_message(reply, FlexSendMessage('Stock message is here', json.loads(generateStockJSON(stockHeader,username+stockTitle,stockAddress,par,startTime))))
 
 def processStatus(reply):
   startTime=time.time()
   if reply=='':
-    line_bot_api.push_message(uid, FlexSendMessage('home temperature is here', json.loads(getHomeTemps(blynkServer, blynkAuth,startTime))))
+    line_bot_api.push_message(lineUid, FlexSendMessage('home temperature is here', json.loads(getHomeTemps(blynkServer, blynkAuth,startTime))))
   else:
     line_bot_api.reply_message(reply, FlexSendMessage('home temperature is here', json.loads(getHomeTemps(blynkServer, blynkAuth,startTime))))
   
 def processHOME(reply):
   if reply=='':
-    line_bot_api.push_message(uid, FlexSendMessage('welcome',json.loads(generateHomeJSON())))
+    line_bot_api.push_message(lineUid, FlexSendMessage('welcome',json.loads(generateHomeJSON())))
   else:
     line_bot_api.reply_message(reply, FlexSendMessage('welcome',json.loads(generateHomeJSON())))
 
@@ -117,9 +117,9 @@ def processHOME(reply):
 welcomeStr="""
 ***********************
   小汪汪	          
-************* V0.22 ***
+************* V0.23 ***
 """
-line_bot_api.push_message(uid, TextSendMessage(welcomeStr))
+line_bot_api.push_message(lineUid, TextSendMessage(welcomeStr))
 
 #processStatus()
 #processStock()
@@ -165,8 +165,13 @@ def handle_message(event):
 
 
   keyword=event.message.text
-
-
+  replyUserStr=''
+  if isinstance(event.source, SourceUser) :
+      profile = line_bot_api.get_profile(event.source.user_id)
+      replyUserStr = str(profile.display_name) ## +' | '+ str(profile.status_message)
+      
+    else:
+      replyUserStr='You-Know-Who'
   print ('now, keyword=',keyword)
   if keyword==u'Finance' or keyword==u'Stock':
     processStock(event.reply_token)
@@ -189,7 +194,7 @@ def handle_message(event):
     print ('no key word found. and in else, event.message.text = ',event.message.text)
     print ('call line_bot_api.reply_message('+event.reply_token)
     if (event.reply_token=='00000000000000000000000000000000'):   # from line
-      line_bot_api.push_message(uid, TextSendMessage(text=event.message.text))   
+      line_bot_api.push_message(lineUid, TextSendMessage(text=event.message.text))   
     else :
     
       line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))

@@ -222,6 +222,27 @@ def generateStockJSON(n0,n1,n2,par,startTime):
           "contents": [
             {
               "type": "text",
+              "text": "data source 台灣銀行 ",
+              "size": "xs",
+              "color": "#aaaaaa",
+              "flex": 0
+            },
+            {
+              "type": "text",
+              "text": "證交所",
+              "color": "#aaaaaa",
+              "size": "xxs",
+              "align": "end"
+            }
+          ]
+        },
+        {
+          "type": "box",
+          "layout": "horizontal",
+          "margin": "md",
+          "contents": [
+            {
+              "type": "text",
               "text": "generated at ",
               "size": "xs",
               "color": "#aaaaaa",
@@ -412,6 +433,20 @@ def generateTempJSON(param,startTime):
       "layout": "horizontal",
       "spacing": "sm",
       "contents": [
+        {
+          "type": "text",
+          "text": "data source : ",
+          "size": "xs",
+          "color": "#aaaaaa",
+          "flex": 0
+        },
+        {
+          "type": "text",
+          "text": "blynk server@lugia",
+          "color": "#aaaaaa",
+          "size": "xs",
+          "align": "end"
+        },
         {
           "type": "text",
           "text": "generated at ",
