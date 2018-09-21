@@ -164,7 +164,7 @@ def handle_message(event):
    #  line_bot_api.push_message(uid, TextSendMessage(text=event.message.text))
 
 
-  keyword=event.message.text
+  keyword=event.message.text.upper()
   replyUserStr=''
   if isinstance(event.source, SourceUser) :
     profile = line_bot_api.get_profile(event.source.user_id)
@@ -174,11 +174,11 @@ def handle_message(event):
     replyUserStr='You-Know-Who'
   print ('user name is ',replyUserStr)  
   print ('now, keyword=',keyword)
-  if keyword==u'Finance' or keyword==u'Stock':
+  if keyword==u'FINANCE' or keyword==u'STOCK':
     processStock(event.reply_token, replyUserStr)
-  elif keyword==u'Temp':
+  elif keyword==u'TEMP' or keyword ==u'STATUS':
     processStatus(event.reply_token)
-  elif keyword==u'Menu':
+  elif keyword==u'MENU' or keyword == u'SCHEDULE':
     processHOME(event.reply_token)
     #line_bot_api.reply_message(, FlexSendMessage('test',json.loads(sendHOME())))
   elif keyword.upper() == 'PROFILE':
