@@ -544,7 +544,7 @@ def generateHomeJSON():
                 "action": {
                     "type": "message",
                     "label": "家裡溫濕度",
-                    "Text": "Status"
+                    "Text": "Temp"
                 }
               }
             ]
