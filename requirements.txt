@@ -1,0 +1,7 @@
+line-bot-sdk
+flask
+datetime
+twstock
+pandas	
+urllib3==1.23
+lxml
