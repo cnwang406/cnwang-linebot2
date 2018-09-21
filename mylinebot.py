@@ -167,14 +167,15 @@ def handle_message(event):
   keyword=event.message.text
   replyUserStr=''
   if isinstance(event.source, SourceUser) :
-      profile = line_bot_api.get_profile(event.source.user_id)
-      replyUserStr = str(profile.display_name) ## +' | '+ str(profile.status_message)
+    profile = line_bot_api.get_profile(event.source.user_id)
+    replyUserStr = str(profile.display_name) ## +' | '+ str(profile.status_message)
       
-    else:
-      replyUserStr='You-Know-Who'
+  else:
+    replyUserStr='You-Know-Who'
+  print ('user name is ',replyUserStr)  
   print ('now, keyword=',keyword)
   if keyword==u'Finance' or keyword==u'Stock':
-    processStock(event.reply_token)
+    processStock(event.reply_token, replyUserStr)
   elif keyword==u'Status':
     processStatus(event.reply_token)
   elif keyword==u'Schedule':
