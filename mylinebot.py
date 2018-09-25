@@ -49,12 +49,12 @@ import urllib.parse
 from urllib import request
 import gzip
 
-from modeldb import db
+#from modeldb import db
 
 
 app = Flask(__name__)
 
-db.init_app(app)
+#db.init_app(app)
 
 
 startTime=time.time()
