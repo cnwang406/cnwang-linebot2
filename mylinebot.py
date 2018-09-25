@@ -4,7 +4,7 @@ TITLE=(
 """
 ***************************************************
 **                                               **
-**      Line Bot  V0.23                          **
+**      Line Bot  V0.24                          **
 **                cnwang. 2018/09                **
 ***************************************************
 
@@ -17,7 +17,6 @@ from flask import Flask,  abort
 from flask import request as frequest
 #from defJSON import fitFlex2,Par2String
 
-from stock import getPrice
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
     SourceUser, SourceGroup, SourceRoom,
@@ -36,6 +35,8 @@ from linebot import (LineBotApi, WebhookHandler)
 from linebot.exceptions import (InvalidSignatureError)
 #from lineutil import generateStockJSON,getHomeTemps, sendHOME
 from lineUtil import (getHomeTemps,generateStockJSON,generateHomeJSON)
+from stock import getPrice
+
 import datetime
 import time
 import os
@@ -46,13 +47,14 @@ import twstock
 import urllib.request
 import urllib.parse
 from urllib import request
-
-#import pandas as pd
 import gzip
 
+from modeldb import db
 
 
 app = Flask(__name__)
+
+db.init_app(app)
 
 
 startTime=time.time()
@@ -117,7 +119,7 @@ def processHOME(reply):
 welcomeStr="""
 ***********************
   小汪汪	          
-************* V0.23 ***
+************* V0.24 ***
 """
 line_bot_api.push_message(lineUid, TextSendMessage(welcomeStr))
 
@@ -131,7 +133,6 @@ def callback():
 	# get X-Line-Signature header value
 	#print (request)
   print ('*'*40)
-  print ('Into callback()')
   signature = frequest.headers['X-Line-Signature']
 
 
@@ -203,5 +204,6 @@ def handle_message(event):
 # 
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+  app.config['DEBUG'] = True
+  port = int(os.environ.get('PORT', 5000))
+  app.run(host='0.0.0.0', port=port)
