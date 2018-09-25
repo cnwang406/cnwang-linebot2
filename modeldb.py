@@ -73,12 +73,12 @@ def dbCheckExist(param):
 	
 
 #print (dbListAllByUser('U769b97b52c66fec77eb598a6223f30a3'))
-
+"""
 addStk= dict(
 	userid = 'U769b97b52c66fec77eb598a6223f30a3',
 	type = 's',
 	fid = '2308',
-	criteria ='>120')
+	criteria ='<120')
 
 chkStk= dict(
 	userid = 'U769b97b52c66fec77eb598a6223f30a3',
@@ -88,3 +88,4 @@ chkStk= dict(
 print(dbListAllByUser(myId))
 dbAddbyUser(addStk)
 print(dbListAllByUser(myId))
+"""
