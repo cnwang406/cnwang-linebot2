@@ -5,3 +5,4 @@ twstock
 pandas	
 urllib3==1.23
 lxml
+psycopg2
