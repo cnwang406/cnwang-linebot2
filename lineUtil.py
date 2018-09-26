@@ -733,7 +733,7 @@ def generateStockByUser(uid, userName, startTime):
   output.replace('{TITLE}', userName+u' 注意的')
   output.replace('{ADDR}', 'cnwang406@gmail.com')
 
-  stockData=generateStockByUser(uid, 'c')
+  stockData=dbListAllByUser(uid, 'c')
   print ('Xrate =='. stockData)
 #sqlStr="SELECT id, type, fid, criteria FROM stocks WHERE (userid = '{0}' AND type='{1}'".format(userId, stype)
 
@@ -749,7 +749,7 @@ def generateStockByUser(uid, userName, startTime):
 
   output+=sep
 
-  stockData=generateStockByUser(uid, 's')
+  stockData=dbListAllByUser(uid, 's')
   print ('Stock =='. stockData)
 #sqlStr="SELECT id, type, fid, criteria FROM stocks WHERE (userid = '{0}' AND type='{1}'".format(userId, stype)
   count=0

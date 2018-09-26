@@ -11,13 +11,20 @@ def dbConn():
 	return con
 myId = 'U769b97b52c66fec77eb598a6223f30a3'	    
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ncgbtvdegevxoc:b9f43bc8591aeff58c8a715b619a90ae2530958368391b3b71020ddbd7c26d02@ec2-54-83-50-145.compute-1.amazonaws.com:5432/dbqd8ec5asbl2'
-def dbListAllByUser(userId):
+def dbListAllByUser(userId, stype):
 	#con = None
 	output=[]
 	con=dbConn()
+	if (stype) :
+
+		sqlStr = "SELECT id, type, fid, criteria FROM stocks WHERE userid = '{0}'".format(userId)
+	else:
+		
+		sqlStr = "SELECT id, type, fid, criteria FROM stocks WHERE (userid = '{0}' AND type='{1}')".format(userId, stype)
+
 	try:
 	    cur = con.cursor()
-	    cur.execute("SELECT * FROM stocks WHERE userid = '{0}'".format(userId))
+	    cur.execute(sqlStr)
 	    ver=cur.fetchall()
 	    #cur.execute("SELECT * FROM Cars WHERE Id=%s", (uId,))
 	    #con.commit()
