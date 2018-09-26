@@ -118,7 +118,7 @@ def processHOME(reply):
 def processStockList(event):
 #generateStockByUser(uid, userName, startTime)
   startTime=time.time()
-  line_bot_api.reply_message(reply, FlexSendMessage('Stock message is here', json.loads(generateStockByUser(event.source.user_id, getUserName(event), startTime))))
+  line_bot_api.reply_message(event.reply_token, FlexSendMessage('Stock message is here', json.loads(generateStockByUser(event.source.user_id, getUserName(event), startTime))))
 
 
 def getUserName(event):
@@ -166,7 +166,7 @@ def callback():
     handler.handle(body, signature)
     print ('exit from hand.handle')
   except InvalidSignatureError:
-    abort(400)
+a    abort(400)
     print ('abort 400')
 
   return 'OK'
@@ -209,8 +209,8 @@ def handle_message(event):
           event.reply_token,
           TextSendMessage(text='LBA cannot retreive user profile without user_id'))
   elif keyword == 'LIST':
-        txt=processStockList(event)
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=txt))
+        processStockList(event)
+        #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=txt))
 
 
   else:
