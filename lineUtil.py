@@ -2,7 +2,7 @@
 import time
 from blynkutil import (blynkGetPinValue, blynkGetPinHistoryValue)
 import datetime
-
+from modeldb import (dbListAllByUser, dbAddbyUser, dbCheckExist)
 
 RED='AA0000'
 GREEN='00AA01'  
@@ -597,3 +597,170 @@ def generateHomeJSON():
   return s
 
 
+def generateStockByUser(uid, userName, startTime):
+  h1="""
+    {
+      "type": "bubble",
+      "styles": {
+        "footer": {
+          "separator": true
+        }
+      },
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "{HEAD}",
+            "weight": "bold",
+            "color": "#1DB446",
+            "size": "sm"
+          },
+          {
+            "type": "text",
+            "text": "{TITLE}",
+            "weight": "bold",
+            "size": "xxl",
+            "margin": "md"
+          },
+          {
+            "type": "text",
+            "text": "{ADDR}",
+            "size": "xs",
+            "color": "#aaaaaa",
+            "wrap": true
+          },
+          {
+            "type": "separator",
+            "margin": "xxl"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "margin": "xxl",
+            "spacing": "sm",
+            "contents": [
+
+  """
+  ct1="""
+              {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "{subject}",
+                    "size": "sm",
+                    "color": "#555555",
+                    "flex": 0
+                  },
+                  {
+                    "type": "text",
+                    "text": "{price}",
+                    "size": "sm",
+                    "color": "#111111",
+                    "align": "end"
+                  }
+                ]
+              }
+  """
+  sep="""
+              {
+                "type": "separator",
+                "margin": "xxl"
+              },
+  """
+  st1="""
+              
+              {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "{subject}",
+                    "size": "sm",
+                    "color": "#555555"
+                  },
+                  {
+                    "type": "text",
+                    "text": "{price}",
+                    "size": "sm",
+                    "color": "#111111",
+                    "align": "end"
+                  }
+                ]
+              }
+
+
+  """
+  ft1="""
+            ]
+          }
+          {
+            "type": "separator",
+            "margin": "xxl"
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "margin": "md",
+            "contents": [
+              {
+                "type": "text",
+                "text": "generated ",
+                "size": "xxs",
+                "color": "#aaaaaa",
+                "flex": 0
+              },
+              {
+                "type": "text",
+                "text": "{timestamp}",
+                "color": "#aaaaaa",
+                "size": "xxs",
+                "align": "end"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  """
+
+  output=""
+  output +=h1.replace ('{head}', 'Finance' )
+  output.replace('{TITLE}', userName+u' 注意的')
+  output.replace('{ADDR}', 'cnwang406@gmail.com')
+
+  stockData=generateStockByUser(uid, 'c')
+  print ('Xrate =='. stockData)
+#sqlStr="SELECT id, type, fid, criteria FROM stocks WHERE (userid = '{0}' AND type='{1}'".format(userId, stype)
+
+  
+  count=0
+  for sd in stockData:
+    output += ct1
+    output.replace('{subject}', sd[2])
+    output.replace('{price}', sd[3])
+    count+=1
+  if count < len(stockData)-1:
+    output+=','
+
+  output+=sep
+
+  stockData=generateStockByUser(uid, 's')
+  print ('Stock =='. stockData)
+#sqlStr="SELECT id, type, fid, criteria FROM stocks WHERE (userid = '{0}' AND type='{1}'".format(userId, stype)
+  count=0
+  for sd in stockData:
+    output += st1
+    output.replace('{subject}', sd[2])
+    output.replace('{price}', sd[3])
+    count+=1
+  if count<len(stockData)-1:
+    output+=','
+  output+=ft1 
+  output.replace('{timestamp}',' ('+str(round(time.time()- startTime,1))+'s)')
+  print(output)
+  return output
