@@ -16,11 +16,11 @@ def dbListAllByUser(userId, stype):
 	output=[]
 	con=dbConn()
 	if (stype) :
-
-		sqlStr = "SELECT id, type, fid, criteria FROM stocks WHERE userid = '{0}'".format(userId)
-	else:
-		
 		sqlStr = "SELECT id, type, fid, criteria FROM stocks WHERE (userid = '{0}' AND type='{1}')".format(userId, stype)
+
+	else:
+		sqlStr = "SELECT id, type, fid, criteria FROM stocks WHERE userid = '{0}'".format(userId)
+		
 
 	try:
 	    cur = con.cursor()

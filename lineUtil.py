@@ -650,14 +650,14 @@ def generateStockByUser(uid, userName, startTime):
                 "contents": [
                   {
                     "type": "text",
-                    "text": "{subject}",
+                    "text": "{SUBJECT}",
                     "size": "sm",
                     "color": "#555555",
                     "flex": 0
                   },
                   {
                     "type": "text",
-                    "text": "{price}",
+                    "text": "{PRICE}",
                     "size": "sm",
                     "color": "#111111",
                     "align": "end"
@@ -679,13 +679,13 @@ def generateStockByUser(uid, userName, startTime):
                 "contents": [
                   {
                     "type": "text",
-                    "text": "{subject}",
+                    "text": "{SUBJECT}",
                     "size": "sm",
                     "color": "#555555"
                   },
                   {
                     "type": "text",
-                    "text": "{price}",
+                    "text": "{PRICE}",
                     "size": "sm",
                     "color": "#111111",
                     "align": "end"
@@ -736,15 +736,13 @@ def generateStockByUser(uid, userName, startTime):
   stockData=dbListAllByUser(uid, 'c')
   print ('Xrate ==',stockData)
 #sqlStr="SELECT id, type, fid, criteria FROM stocks WHERE (userid = '{0}' AND type='{1}'".format(userId, stype)
-
-  
   count=0
   for sd in stockData:
     output += ct1
-    output.replace('{subject}', sd[2])
-    output.replace('{price}', sd[3])
+    output=output.replace('{SUBJECT}', sd[2])
+    output=output.replace('{PRICE}', sd[3])
     count+=1
-  if count < len(stockData)-1:
+  if count < len(stockData):
     output+=','
 
   output+=sep
@@ -755,10 +753,10 @@ def generateStockByUser(uid, userName, startTime):
   count=0
   for sd in stockData:
     output += st1
-    output.replace('{subject}', sd[2])
-    output.replace('{price}', sd[3])
+    output=output.replace('{SUBJECT}', sd[2])
+    output=output.replace('{PRICE}', sd[3])
     count+=1
-  if count<len(stockData)-1:
+  if count<len(stockData):
     output+=','
   output+=ft1 
   output.replace('{timestamp}',' ('+str(round(time.time()- startTime,1))+'s)')
