@@ -735,6 +735,7 @@ def generateStockByUser(uid, userName, startTime):
 
   stockData=dbListAllByUser(uid, 'c')
   print ('Xrate ==',stockData)
+  print ('len(stockData)=', len(stockData))
 #sqlStr="SELECT id, type, fid, criteria FROM stocks WHERE (userid = '{0}' AND type='{1}'".format(userId, stype)
   count=0
   for sd in stockData:
