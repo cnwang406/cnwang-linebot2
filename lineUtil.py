@@ -746,7 +746,7 @@ def generateStockByUser(uid, userName, startTime):
     print ('round ',count)
     #if count <= len(stockData):
     #  print (' add ,')
-    output+=','
+    #output+=','
 
   output+=sep
   print (' add sep')
