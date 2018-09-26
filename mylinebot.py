@@ -34,7 +34,7 @@ from linebot.models import (
 from linebot import (LineBotApi, WebhookHandler)
 from linebot.exceptions import (InvalidSignatureError)
 #from lineutil import generateStockJSON,getHomeTemps, sendHOME
-from lineUtil import (getHomeTemps,generateStockJSON,generateHomeJSON)
+from lineUtil import (getHomeTemps,generateStockJSON,generateHomeJSON,generateStockByUser)
 from stock import getPrice
 
 import datetime
