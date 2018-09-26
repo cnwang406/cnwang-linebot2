@@ -4,7 +4,7 @@ TITLE=(
 """
 ***************************************************
 **                                               **
-**      Line Bot  V0.25                          **
+**      Line Bot  V0.26                          **
 **                cnwang. 2018/09                **
 ***************************************************
 
@@ -119,7 +119,7 @@ def processStockList(event):
 #generateStockByUser(uid, userName, startTime)
   startTime=time.time()
   s=generateStockByUser(event.source.user_id, getUserName(event), startTime)
-  print (s)
+  
   return s
 
 def getUserName(event):
@@ -135,11 +135,8 @@ def getUserName(event):
 welcomeStr="""
 ***********************
   小汪汪	          
-<<<<<<< HEAD
-************* V0.24 ***
-=======
-************* V0.25 ***
->>>>>>> v25
+************* V0.26 ***
+
 """
 line_bot_api.push_message(lineUid, TextSendMessage(welcomeStr))
 
@@ -214,7 +211,7 @@ def handle_message(event):
           TextSendMessage(text='LBA cannot retreive user profile without user_id'))
   elif keyword == 'LIST':
         txt=processStockList(event)
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='get stock list'))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=txt))
 
 
   else:
