@@ -734,7 +734,7 @@ def generateStockByUser(uid, userName, startTime):
   output.replace('{ADDR}', 'cnwang406@gmail.com')
 
   stockData=dbListAllByUser(uid, 'c')
-  print ('Xrate =='. stockData)
+  print ('Xrate ==',stockData)
 #sqlStr="SELECT id, type, fid, criteria FROM stocks WHERE (userid = '{0}' AND type='{1}'".format(userId, stype)
 
   
@@ -749,8 +749,8 @@ def generateStockByUser(uid, userName, startTime):
 
   output+=sep
 
-  stockData=dbListAllByUser(uid, 's')
-  print ('Stock =='. stockData)
+  stockData=dbListAllByUser (uid, 's')
+  print ('Stock ==', stockData)
 #sqlStr="SELECT id, type, fid, criteria FROM stocks WHERE (userid = '{0}' AND type='{1}'".format(userId, stype)
   count=0
   for sd in stockData:
