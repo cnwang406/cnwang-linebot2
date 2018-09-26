@@ -744,7 +744,7 @@ def generateStockByUser(uid, userName, startTime):
     output=output.replace('{PRICE}', sd[3])
     count+=1
     print ('round ',count)
-    if count < len(stockData):
+    if count <= len(stockData):
       print (' add ,')
       output+=','
 
@@ -759,9 +759,9 @@ def generateStockByUser(uid, userName, startTime):
     output=output.replace('{SUBJECT}', sd[2])
     output=output.replace('{PRICE}', sd[3])
     count+=1
-    if count<len(stockData):
+    if count<=len(stockData):
       output+=','
-      
+
   output+=ft1 
   output.replace('{timestamp}',' ('+str(round(time.time()- startTime,1))+'s)')
   print(output)
