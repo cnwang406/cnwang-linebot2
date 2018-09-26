@@ -97,27 +97,27 @@ stockAddress = 'cnwang406@gmail.com'
 def processStock(event, username):
   startTime=time.time()
   getPrice(par)
-  #if str(event.reply_token)=='00000000000000000000000000000000' :
-  #  line_bot_api.push_message(lineUid, FlexSendMessage('Stock message is here', json.loads(generateStockJSON(stockHeader,u'小汪汪'+stockTitle,stockAddress,par,startTime))))
-  #else:
-  line_bot_api.reply_message(event.reply_token, FlexSendMessage('Stock message is here', json.loads(generateStockJSON(stockHeader,getUserName(event)+stockTitle,stockAddress,par,startTime))))
+  if str(event.reply_token)=='00000000000000000000000000000000' :
+    line_bot_api.push_message(lineUid, FlexSendMessage('Stock message is here', json.loads(generateStockJSON(stockHeader,u'小汪汪'+stockTitle,stockAddress,par,startTime))))
+  else:
+    line_bot_api.reply_message(event.reply_token, FlexSendMessage('Stock message is here', json.loads(generateStockJSON(stockHeader,getUserName(event)+stockTitle,stockAddress,par,startTime))))
 
 def processStatus(event):
   startTime=time.time()
-  #if event.reply_token=='00000000000000000000000000000000':
-  #  line_bot_api.push_message(lineUid, FlexSendMessage('home temperature is here', json.loads(getHomeTemps(blynkServer, blynkAuth,startTime))))
-  #else:
-  line_bot_api.reply_message(event.reply_token, FlexSendMessage('home temperature is here', json.loads(getHomeTemps(blynkServer, blynkAuth,startTime))))
+  if event.reply_token=='00000000000000000000000000000000':
+    line_bot_api.push_message(lineUid, FlexSendMessage('home temperature is here', json.loads(getHomeTemps(blynkServer, blynkAuth,startTime))))
+  else:
+    line_bot_api.reply_message(event.reply_token, FlexSendMessage('home temperature is here', json.loads(getHomeTemps(blynkServer, blynkAuth,startTime))))
 
 def processHOME1():
     line_bot_api.push_message(lineUid, FlexSendMessage('welcome',json.loads(generateHomeJSON())))
 
 def processHOME(event):
 
-  #if event.reply_token=='00000000000000000000000000000000':
-  #  line_bot_api.push_message(lineUid, FlexSendMessage('welcome',json.loads(generateHomeJSON())))
-  #else:
-  line_bot_api.reply_message(event.reply_token, FlexSendMessage('welcome',json.loads(generateHomeJSON())))
+  if event.reply_token=='00000000000000000000000000000000':
+    line_bot_api.push_message(lineUid, FlexSendMessage('welcome',json.loads(generateHomeJSON())))
+  else:
+    line_bot_api.reply_message(event.reply_token, FlexSendMessage('welcome',json.loads(generateHomeJSON())))
 
 def processStockList(event):
 #generateStockByUser(uid, userName, startTime)
@@ -196,11 +196,11 @@ def handle_message(event):
   print ('user name is ',replyUserStr)  
   print ('now, keyword=',keyword)
   if keyword==u'FINANCE' or keyword==u'STOCK':
-    processStock(event.reply_token, replyUserStr)
+    processStock(event, replyUserStr)
   elif keyword==u'TEMP' or keyword ==u'STATUS':
-    processStatus(event.reply_token)
+    processStatus(event)
   elif keyword==u'MENU' or keyword == u'SCHEDULE':
-    processHOME(event.reply_token)
+    processHOME(event)
     #line_bot_api.reply_message(, FlexSendMessage('test',json.loads(sendHOME())))
   elif keyword == 'PROFILE':
     if isinstance(event.source, SourceUser) :
