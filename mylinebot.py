@@ -97,7 +97,7 @@ stockAddress = 'cnwang406@gmail.com'
 def processStock(event, username):
   startTime=time.time()
   getPrice(par)
-  if event.reply_token=='00000000000000000000000000000000' :
+  if str(event.reply_token)=='00000000000000000000000000000000' :
     line_bot_api.push_message(lineUid, FlexSendMessage('Stock message is here', json.loads(generateStockJSON(stockHeader,u'小汪汪'+stockTitle,stockAddress,par,startTime))))
   else:
     line_bot_api.reply_message(event.reply_token, FlexSendMessage('Stock message is here', json.loads(generateStockJSON(stockHeader,getUserName(event)+stockTitle,stockAddress,par,startTime))))
@@ -108,7 +108,10 @@ def processStatus(event):
     line_bot_api.push_message(lineUid, FlexSendMessage('home temperature is here', json.loads(getHomeTemps(blynkServer, blynkAuth,startTime))))
   else:
     line_bot_api.reply_message(event.reply_token, FlexSendMessage('home temperature is here', json.loads(getHomeTemps(blynkServer, blynkAuth,startTime))))
-  
+
+def processHOME1():
+    line_bot_api.push_message(lineUid, FlexSendMessage('welcome',json.loads(generateHomeJSON())))
+
 def processHOME(event):
 
   if event.reply_token=='00000000000000000000000000000000':
@@ -142,7 +145,7 @@ line_bot_api.push_message(lineUid, TextSendMessage(welcomeStr))
 
 #processStatus()
 #processStock()
-processHOME('')
+processHOME1()
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/callback", methods=['POST']) # Use postback/message will call this.
