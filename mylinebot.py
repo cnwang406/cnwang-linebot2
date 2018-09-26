@@ -94,26 +94,27 @@ stockAddress = 'cnwang406@gmail.com'
 #pDate=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 
-def processStock(reply, username):
+def processStock(event, username):
   startTime=time.time()
   getPrice(par)
-  if reply=='' :
+  if event.reply_token=='00000000000000000000000000000000' :
     line_bot_api.push_message(lineUid, FlexSendMessage('Stock message is here', json.loads(generateStockJSON(stockHeader,u'小汪汪'+stockTitle,stockAddress,par,startTime))))
   else:
-    line_bot_api.reply_message(reply, FlexSendMessage('Stock message is here', json.loads(generateStockJSON(stockHeader,username+stockTitle,stockAddress,par,startTime))))
+    line_bot_api.reply_message(event.reply_token, FlexSendMessage('Stock message is here', json.loads(generateStockJSON(stockHeader,getUserName(event)+stockTitle,stockAddress,par,startTime))))
 
-def processStatus(reply):
+def processStatus(event):
   startTime=time.time()
-  if reply=='':
+  if event.reply_token=='00000000000000000000000000000000':
     line_bot_api.push_message(lineUid, FlexSendMessage('home temperature is here', json.loads(getHomeTemps(blynkServer, blynkAuth,startTime))))
   else:
-    line_bot_api.reply_message(reply, FlexSendMessage('home temperature is here', json.loads(getHomeTemps(blynkServer, blynkAuth,startTime))))
+    line_bot_api.reply_message(event.reply_token, FlexSendMessage('home temperature is here', json.loads(getHomeTemps(blynkServer, blynkAuth,startTime))))
   
-def processHOME(reply):
-  if reply=='':
+def processHOME(event):
+
+  if event.reply_token=='00000000000000000000000000000000':
     line_bot_api.push_message(lineUid, FlexSendMessage('welcome',json.loads(generateHomeJSON())))
   else:
-    line_bot_api.reply_message(reply, FlexSendMessage('welcome',json.loads(generateHomeJSON())))
+    line_bot_api.reply_message(event.reply_token, FlexSendMessage('welcome',json.loads(generateHomeJSON())))
 
 def processStockList(event):
 #generateStockByUser(uid, userName, startTime)

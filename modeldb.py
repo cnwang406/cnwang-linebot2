@@ -20,15 +20,10 @@ def dbListAllByUser(userId, stype):
 
 	else:
 		sqlStr = "SELECT id, type, fid, criteria FROM stocks WHERE userid = '{0}'".format(userId)
-		
-
 	try:
 	    cur = con.cursor()
 	    cur.execute(sqlStr)
 	    ver=cur.fetchall()
-	    #cur.execute("SELECT * FROM Cars WHERE Id=%s", (uId,))
-	    #con.commit()
-
 	except psycopg2.DatabaseError as e:
 	    print('=Error %s' % e)
 	    sys.exit(1)
@@ -37,7 +32,7 @@ def dbListAllByUser(userId, stype):
 	        con.close()
 	    
 	for c in ver:
-		output.append(c)
+		output.append(list(c))
 	return output
 
 
@@ -80,7 +75,7 @@ def dbCheckExist(param):
 	
 
 #print (dbListAllByUser('U769b97b52c66fec77eb598a6223f30a3'))
-"""
+
 addStk= dict(
 	userid = 'U769b97b52c66fec77eb598a6223f30a3',
 	type = 's',
@@ -92,7 +87,7 @@ chkStk= dict(
 	fid = '2317'
 )
 
-print(dbListAllByUser(myId))
-dbAddbyUser(addStk)
-print(dbListAllByUser(myId))
-"""
+#print(dbListAllByUser(myId))
+print(dbListAllByUser(myId, ''))
+#print(dbListAllByUser(myId))
+

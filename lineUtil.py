@@ -641,6 +641,26 @@ def generateStockByUser(uid, userName, startTime):
             "margin": "xxl",
             "spacing": "sm",
             "contents": [
+              {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "幣 別",
+                    "size": "sm",
+                    "color": "#555555",
+                    "flex": 0
+                  },
+                  {
+                    "type": "text",
+                    "text": "匯 率",
+                    "size": "sm",
+                    "color": "#111111",
+                    "align": "end"
+                  }
+                ]
+              },
 
   """
   ct1="""
@@ -669,6 +689,26 @@ def generateStockByUser(uid, userName, startTime):
               {
                 "type": "separator",
                 "margin": "xxl"
+              },
+              {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "股票代碼",
+                    "size": "sm",
+                    "color": "#555555",
+                    "flex": 0
+                  },
+                  {
+                    "type": "text",
+                    "text": "條 件",
+                    "size": "sm",
+                    "color": "#111111",
+                    "align": "end"
+                  }
+                ]
               },
   """
   st1="""
