@@ -729,9 +729,9 @@ def generateStockByUser(uid, userName, startTime):
   """
 
   output=""
-  output +=h1.replace ('{head}', 'Finance' )
-  output.replace('{TITLE}', userName+u' 注意的')
-  output.replace('{ADDR}', 'cnwang406@gmail.com')
+  output +=h1.replace ('{HEAD}', 'Finance' )
+  output=output.replace('{TITLE}', userName+u' 注意的')
+  output=output.replace('{ADDR}', 'cnwang406@gmail.com')
 
   stockData=dbListAllByUser(uid, 'c')
   print ('Xrate ==',stockData)
@@ -742,11 +742,13 @@ def generateStockByUser(uid, userName, startTime):
     output=output.replace('{SUBJECT}', sd[2])
     output=output.replace('{PRICE}', sd[3])
     count+=1
+    print ('round ',count)
   if count < len(stockData):
+    print (' add ,')
     output+=','
 
   output+=sep
-
+  print (' add sep')
   stockData=dbListAllByUser (uid, 's')
   print ('Stock ==', stockData)
 #sqlStr="SELECT id, type, fid, criteria FROM stocks WHERE (userid = '{0}' AND type='{1}'".format(userId, stype)
