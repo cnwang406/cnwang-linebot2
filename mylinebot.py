@@ -118,9 +118,8 @@ def processHOME(reply):
 def processStockList(event):
 #generateStockByUser(uid, userName, startTime)
   startTime=time.time()
-  s=generateStockByUser(event.source.user_id, getUserName(event), startTime)
-  
-  return s
+  line_bot_api.reply_message(reply, FlexSendMessage('Stock message is here', json.loads(generateStockByUser(event.source.user_id, getUserName(event), startTime))))
+
 
 def getUserName(event):
   if isinstance(event.source, SourceUser) :

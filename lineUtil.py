@@ -763,6 +763,6 @@ def generateStockByUser(uid, userName, startTime):
       output+=','
 
   output+=ft1 
-  output=output.replace('{timestamp}',' ('+str(round(time.time()- startTime,1))+'s)')
+  output=output.replace('{timestamp}',datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+' ('+str(round(time.time()- startTime,1))+'s)')
   print(output)
   return output
