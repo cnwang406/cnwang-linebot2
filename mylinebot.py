@@ -4,12 +4,12 @@ TITLE=(
 """
 ***************************************************
 **                                               **
-**      Line Bot  V0.24                          **
+**      Line Bot  V0.25                          **
 **                cnwang. 2018/09                **
 ***************************************************
 
 """
-)
+)  
 
 
 import json
@@ -50,6 +50,7 @@ from urllib import request
 import gzip
 
 #from modeldb import db
+
 
 
 app = Flask(__name__)
@@ -114,12 +115,31 @@ def processHOME(reply):
   else:
     line_bot_api.reply_message(reply, FlexSendMessage('welcome',json.loads(generateHomeJSON())))
 
+def processStockList(event):
+#generateStockByUser(uid, userName, startTime)
+  startTime=time.time()
+  s=generateStockByUser(event.source.user_id, getUserName(event), startTime)
+  print (s)
+  return s
+
+def getUserName(event):
+  if isinstance(event.source, SourceUser) :
+      profile = line_bot_api.get_profile(event.source.user_id)
+      replyUserStr = str(profile.display_name) ## +' | '+ str(profile.status_message)
+        
+  else:
+    replyUserStr='You-Know-Who'
+  return replyUserStr
 
 
 welcomeStr="""
 ***********************
   小汪汪	          
+<<<<<<< HEAD
 ************* V0.24 ***
+=======
+************* V0.25 ***
+>>>>>>> v25
 """
 line_bot_api.push_message(lineUid, TextSendMessage(welcomeStr))
 
@@ -166,13 +186,13 @@ def handle_message(event):
 
 
   keyword=event.message.text.upper()
-  replyUserStr=''
-  if isinstance(event.source, SourceUser) :
-    profile = line_bot_api.get_profile(event.source.user_id)
-    replyUserStr = str(profile.display_name) ## +' | '+ str(profile.status_message)
-      
-  else:
-    replyUserStr='You-Know-Who'
+  replyUserStr=getUserName(event)
+#  if isinstance(event.source, SourceUser) :
+#    profile = line_bot_api.get_profile(event.source.user_id)
+#    replyUserStr = str(profile.display_name) ## +' | '+ str(profile.status_message)      
+#  else:
+#    replyUserStr='You-Know-Who'
+
   print ('user name is ',replyUserStr)  
   print ('now, keyword=',keyword)
   if keyword==u'FINANCE' or keyword==u'STOCK':
@@ -182,7 +202,7 @@ def handle_message(event):
   elif keyword==u'MENU' or keyword == u'SCHEDULE':
     processHOME(event.reply_token)
     #line_bot_api.reply_message(, FlexSendMessage('test',json.loads(sendHOME())))
-  elif keyword.upper() == 'PROFILE':
+  elif keyword == 'PROFILE':
     if isinstance(event.source, SourceUser) :
       profile = line_bot_api.get_profile(event.source.user_id)
       profileStr = str(profile.display_name)+' | '+ str(profile.status_message)
@@ -192,6 +212,11 @@ def handle_message(event):
         line_bot_api.reply_message(
           event.reply_token,
           TextSendMessage(text='LBA cannot retreive user profile without user_id'))
+  elif keyword == 'LIST':
+        txt=processStockList(event)
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='get stock list'))
+
+
   else:
     print ('no key word found. and in else, event.message.text = ',event.message.text)
     print ('call line_bot_api.reply_message('+event.reply_token)
