@@ -166,7 +166,7 @@ def callback():
     handler.handle(body, signature)
     print ('exit from hand.handle')
   except InvalidSignatureError:
-a    abort(400)
+    abort(400)
     print ('abort 400')
 
   return 'OK'
