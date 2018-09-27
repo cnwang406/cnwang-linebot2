@@ -32,7 +32,7 @@ def getStock(par):
 	for ls in lStock:
 		print ('getting ',ls[1])
 		s = twstock.realtime.get(ls[1])
-		if (s['Success']):
+		if (s['success']):
 			output = '{0} ({1}) close price is {2} ('.format(ls[1],s['info']['name'],s['realtime']['latest_trade_price'])
 
 			dif=round(float(s['realtime']['latest_trade_price']) - float(s['realtime']['open']),2)
