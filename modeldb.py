@@ -63,13 +63,13 @@ def dbListAllByUserForJSON(userId):
 	for c in curr:
 		tmpCur[0] = c[2]
 		tmpCur[3] = c[3]
-		if tmpCur[5]='' : tmpCur[5]='*'
+		if tmpCur[5]=='' : tmpCur[5]='*'
 		tmpCurL.append(list(tmpCur))
 
 	for s in stkr:
 		tmpStk[1]=s[2]
 		tmpStk[5]=s[3]
-		if tmpStk[5]='' : tmpStk[5]='*'
+		if tmpStk[5]=='' : tmpStk[5]='*'
 		tmpStkL.append(list(tmpStk))
 	output = [tmpCurL, tmpStkL]
 	print ('dbListAllByUserForJSON({0}'.format(userId))
