@@ -13,76 +13,76 @@ HUMIDCOLORGRID=['FF8000','9933FF','66FF66','0066CC','004C99','006600']
 
 def generateStockJSON(n0,n1,n2,par,startTime):
   t0="""
-  {
-    "type": "bubble",
-    "styles": {
-      "footer": {
-        "separator": true
-      }
-    },
-    "body": {
-      "type": "box",
-      "layout": "vertical",
-      "contents": [
-        {
-          "type": "text",
-          "text": "{0}",
-          "weight": "bold",
-          "color": "#1DB446",
-          "size": "sm"
-        },
-        {
-          "type": "text",
-          "text": "{1}",
-          "weight": "bold",
-          "size": "xxl",
-          "margin": "md"
-        },
-        {
-          "type": "text",
-          "text": "{2}",
-          "size": "xs",
-          "color": "#aaaaaa",
-          "wrap": true
-        },
-        {
-          "type": "separator",
-          "margin": "xxl"
-        },
-        {
-          "type": "box",
-          "layout": "vertical",
-          "margin": "xxl",
-          "spacing": "sm",
-          "contents": [
-            {
-              "type": "box",
-              "layout": "horizontal",
-              "contents": [
-                {
-                  "type": "text",
-                  "text": "dollars",
-                  "size": "sm",
-                  "color": "#555555",
-                  "flex": 0
-                },
-                {
-                  "type": "text",
-                  "text": "buy",
-                  "size": "sm",
-                  "color": "#111111",
-                  "align": "end"
-                },
-                {
-                  "type": "text",
-                  "text": "sell",
-                  "size": "sm",
-                  "color": "#111111",
-                  "align": "end"
-                }
-              ]
-            },
-  """
+    {
+      "type": "bubble",
+      "styles": {
+        "footer": {
+          "separator": true
+        }
+      },
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "{0}",
+            "weight": "bold",
+            "color": "#1DB446",
+            "size": "sm"
+          },
+          {
+            "type": "text",
+            "text": "{1}",
+            "weight": "bold",
+            "size": "xxl",
+            "margin": "md"
+          },
+          {
+            "type": "text",
+            "text": "{2}",
+            "size": "xs",
+            "color": "#aaaaaa",
+            "wrap": true
+          },
+          {
+            "type": "separator",
+            "margin": "xxl"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "margin": "xxl",
+            "spacing": "sm",
+            "contents": [
+              {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "dollars",
+                    "size": "sm",
+                    "color": "#555555",
+                    "flex": 0
+                  },
+                  {
+                    "type": "text",
+                    "text": "buy",
+                    "size": "sm",
+                    "color": "#111111",
+                    "align": "end"
+                  },
+                  {
+                    "type": "text",
+                    "text": "sell",
+                    "size": "sm",
+                    "color": "#111111",
+                    "align": "end"
+                  }
+                ]
+              },
+    """
   ct="""
             {
               "type": "box",
@@ -209,57 +209,57 @@ def generateStockJSON(n0,n1,n2,par,startTime):
   """
         
   t2="""
-          ]
-        },
-        {
-          "type": "separator",
-          "margin": "xxl"
-        },
-        {
-          "type": "box",
-          "layout": "horizontal",
-          "margin": "md",
-          "contents": [
-            {
-              "type": "text",
-              "text": "data source 台灣銀行 ",
-              "size": "xs",
-              "color": "#aaaaaa",
-              "flex": 0
-            },
-            {
-              "type": "text",
-              "text": "證交所",
-              "color": "#aaaaaa",
-              "size": "xxs",
-              "align": "end"
-            }
-          ]
-        },
-        {
-          "type": "box",
-          "layout": "horizontal",
-          "margin": "md",
-          "contents": [
-            {
-              "type": "text",
-              "text": "generated at ",
-              "size": "xs",
-              "color": "#aaaaaa",
-              "flex": 0
-            },
-            {
-              "type": "text",
-              "text": "{3}",
-              "color": "#aaaaaa",
-              "size": "xxs",
-              "align": "end"
-            }
-          ]
-        }
-      ]
+            ]
+          },
+          {
+            "type": "separator",
+            "margin": "xxl"
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "margin": "md",
+            "contents": [
+              {
+                "type": "text",
+                "text": "data source 台灣銀行 ",
+                "size": "xs",
+                "color": "#aaaaaa",
+                "flex": 0
+              },
+              {
+                "type": "text",
+                "text": "證交所",
+                "color": "#aaaaaa",
+                "size": "xxs",
+                "align": "end"
+              }
+            ]
+          },
+          {
+            "type": "box",
+            "layout": "horizontal",
+            "margin": "md",
+            "contents": [
+              {
+                "type": "text",
+                "text": "generated at ",
+                "size": "xs",
+                "color": "#aaaaaa",
+                "flex": 0
+              },
+              {
+                "type": "text",
+                "text": "{3}",
+                "color": "#aaaaaa",
+                "size": "xxs",
+                "align": "end"
+              }
+            ]
+          }
+        ]
+      }
     }
-  }
 
   """
   target=t0.replace('{0}',n0)

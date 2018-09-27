@@ -54,14 +54,14 @@ def dbListAllByUserForJSON(userId):
 	    sys.exit(1)
 	finally:
 	    if con:
-	        con.close()
+	    	con.close()
 	
 
 	#currency = [['USD','--','--'],['AUD','--','--'],['CNY','--','--'],['JPY','--','--']]
 
 	#stock = [[u'中美晶','5483','???','???','???','*','991111'],
-  tmpCur=['','','']
-  tmpStk=['','','','','','','']
+	tmpCur=['','','']
+	tmpStk=['','','','','','','']
 	for c in curr:
 		tmpCur[0] = c[2]
 		output.append(list(tmpCur))
@@ -126,6 +126,6 @@ chkStk= dict(
 )
 
 #print(dbListAllByUser(myId))
-print(dbListAllByUser(myId, ''))
+#print(dbListAllByUser(myId, ''))
 #print(dbListAllByUser(myId))
 
