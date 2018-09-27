@@ -35,6 +35,44 @@ def dbListAllByUser(userId, stype):
 		output.append(list(c))
 	return output
 
+def dbListAllByUserForJSON(userId):
+	output=[]
+	con=dbConn()
+	if (stype) :
+		sqlStr = "SELECT id, type, fid, criteria FROM stocks WHERE (userid = '{0}' AND type='{1}')".format(userId, stype)
+
+	else:
+		sqlStr = "SELECT id, type, fid, criteria FROM stocks WHERE userid = '{0}'".format(userId)
+	try:
+	    cur = con.cursor()
+	    cur.execute( "SELECT id, type, fid, criteria FROM stocks WHERE (userid = '{0}' AND type='c')".format(userId))
+	    curr=cur.fetchall()
+	    cur.execute( "SELECT id, type, fid, criteria FROM stocks WHERE (userid = '{0}' AND type='s')".format(userId))
+	    stkr=cur.fetchall()
+	except psycopg2.DatabaseError as e:
+	    print('=Error %s' % e)
+	    sys.exit(1)
+	finally:
+	    if con:
+	        con.close()
+	
+
+	#currency = [['USD','--','--'],['AUD','--','--'],['CNY','--','--'],['JPY','--','--']]
+
+	#stock = [[u'中美晶','5483','???','???','???','*','991111'],
+  tmpCur=['','','']
+  tmpStk=['','','','','','','']
+	for c in curr:
+		tmpCur[0] = c[2]
+		output.append(list(tmpCur))
+
+	for s in stkr:
+		tmpStk[1]=s[2]
+		output.append(list(tmpStk))
+	print ('dbListAllByUserForJSON({0}'.format(userId))
+	print (output)
+	return output
+
 
 def dbAddbyUser(param):
 	#print (param['userid'])

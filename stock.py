@@ -32,6 +32,7 @@ def getStock(par):
 		output = '{0} ({1}) close price is {2} ('.format(ls[1],s['info']['name'],s['realtime']['latest_trade_price'])
 
 		dif=round(float(s['realtime']['latest_trade_price']) - float(s['realtime']['open']),2)
+		ls[0]=str(s['info']['name'])
 		ls[3]=str(dif)
 		ls[4]=str(round(float(ls[3])/float(s['realtime']['open'])*100,1))+'%'
 		if dif>0:
