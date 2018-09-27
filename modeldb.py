@@ -58,13 +58,16 @@ def dbListAllByUserForJSON(userId):
 	#stock = [[u'中美晶','5483','???','???','???','*','991111'],
 	tmpCur=['','','']
 	tmpStk=['','','','','','','']
+	tmpCurL=[]
+	tmpStkL=[]
 	for c in curr:
 		tmpCur[0] = c[2]
-		output.append(list(tmpCur))
+		tmpCurL.append(list(tmpCur))
 
 	for s in stkr:
 		tmpStk[1]=s[2]
-		output.append(list(tmpStk))
+		tmpStkL.append(list(tmpStk))
+	output = [tmpCurL, tmpStkL]
 	print ('dbListAllByUserForJSON({0}'.format(userId))
 	print (output)
 	return output
