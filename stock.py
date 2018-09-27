@@ -62,3 +62,4 @@ def getStock(par):
 def getPrice(par):
 	getXrate(par)
 	getStock(par)	
+	print (par)
