@@ -101,7 +101,12 @@ def processStock(event, username):
   #par.append(dbListAllByUser(event.source.user_id,'s'))
   #print (par)
   getPrice(par)
-  print (par)
+  print ('event=',event)
+  print ('username = ',getUserName(event))
+  print ('event=',event)
+  print ('.'*10)
+  print ('json=',json.loads(generateStockJSON(stockHeader,getUserName(event)+stockTitle,stockAddress,par,startTime)))
+  print ('.'*10)
   if str(event.reply_token)=='00000000000000000000000000000000' :
     line_bot_api.push_message(lineUid, FlexSendMessage('Stock message is here', json.loads(generateStockJSON(stockHeader,u'小汪汪'+stockTitle,stockAddress,par,startTime))))
   else:
