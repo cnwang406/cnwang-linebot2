@@ -9,7 +9,7 @@ GREEN='00AA01'
 #                <4        6       8         10        12      14        16      18        20        22      24      26        28      30      32        34
 TEMPCOLORGRID=['330066','000066','000099','0000CC','003366','004C99','0066CC','0080FF','3399FF','009999','006633','009900','FF8000','FF3333','990000','CC0000']
 #                 20        40        60      80      100
-HUMIDCOLORGRID=['FF8000','9933FF','66FF66','0066CC','004C99','006600']  
+HUMIDCOLORGRID=['FF8000','9933FF','66FF66','0066CC','004C99','006600']
 
 def generateStockJSON(n0,n1,n2,par,startTime):
   t0="""
@@ -789,9 +789,8 @@ def generateStockByUser(uid, userName, startTime):
     #output+=','
 
   output+=sep
-  print (' add sep')
   stockData=dbListAllByUser (uid, 's')
-  print ('Stock ==', stockData)
+
 #sqlStr="SELECT id, type, fid, criteria FROM stocks WHERE (userid = '{0}' AND type='{1}'".format(userId, stype)
   count=0
   for sd in stockData:
@@ -799,7 +798,7 @@ def generateStockByUser(uid, userName, startTime):
     output=output.replace('{SUBJECT}', sd[2])
     output=output.replace('{PRICE}', sd[3])
     count+=1
-    if count<    len(stockData):
+    if count< len(stockData):
       output+=','
 
   output+=ft1 

@@ -39,6 +39,9 @@ def getStock(par):
 			ls[0]=str(s['info']['name'])
 			ls[3]=str(dif)
 			ls[4]=str(round(float(ls[3])/float(s['realtime']['open'])*100,1))+'%'
+
+			if (ls[5]=='') : ls[5]=str('**') 
+
 			if dif>0:
 				ls[6]='aa0000'
 			elif dif==0:
@@ -57,6 +60,12 @@ def getStock(par):
 			output += ' diff {0} ({1})'.format(ls[3],ls[4])	
 			print (output)
 			ls[2]='----'
+
+			if (ls[5]=='') : ls[5]=str('**') 
+			
+
+
+
 	print ('-'*20)
 
 def getPrice(par):
