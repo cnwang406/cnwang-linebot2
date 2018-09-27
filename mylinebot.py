@@ -4,7 +4,7 @@ TITLE=(
 """
 ***************************************************
 **                                               **
-**      Line Bot  V0.26                          **
+**      Line Bot  V0.27                          **
 **                cnwang. 2018/09                **
 ***************************************************
 
@@ -34,7 +34,7 @@ from linebot.models import (
 from linebot import (LineBotApi, WebhookHandler)
 from linebot.exceptions import (InvalidSignatureError)
 #from lineutil import generateStockJSON,getHomeTemps, sendHOME
-from lineUtil import (getHomeTemps,generateStockJSON,generateHomeJSON,generateStockByUser)
+from lineUtil import (getHomeTemps,generateStockJSON,generateHomeJSON,generateStockByUser,generateHelpJSON)
 from stock import getPrice
 
 import datetime
@@ -125,6 +125,9 @@ def processStockList(event):
 #generateStockByUser(uid, userName, startTime)
   startTime=time.time()
   line_bot_api.reply_message(event.reply_token, FlexSendMessage('Stock message is here', json.loads(generateStockByUser(event.source.user_id, getUserName(event), startTime))))
+def processHelp(event):
+  startTime=time.time()
+  line_bot_api.reply_message(event.reply_token, FlexSendMessage('HELP', json.loads(generateHelpJSON(startTime))))
 
 
 def getUserName(event):
@@ -141,7 +144,7 @@ def getUserName(event):
 welcomeStr="""
 ***********************
   小汪汪	          
-************* V0.26 ***
+************* V0.27 ***
 
 """
 line_bot_api.push_message(lineUid, TextSendMessage(welcomeStr))
@@ -218,7 +221,8 @@ def handle_message(event):
   elif keyword == 'LIST':
         processStockList(event)
         #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=txt))
-
+  elif keyword == 'HELP':
+        processHelp(event)
 
   else:
     print ('no key word found. and in else, event.message.text = ',event.message.text)
