@@ -43,6 +43,7 @@ import os
 import pandas as pd
 import ssl
 import twstock
+import re
 
 import urllib.request
 import urllib.parse
@@ -93,6 +94,21 @@ stockTitle = u' 問的'
 stockAddress = 'cnwang406@gmail.com'
 #pDate=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
+def processModifyStock(event, username):
+  reStr=r'[+-](.*),(.*)'
+  s=event.message.text.upper()
+  m = re.finditer(regex, s, re.MULTILINE)
+  for mn,ms in enumerate(m):
+    stockCode=str(ms.groups(0)[0])
+    stockCriteria=str(ms.groups(0)[1])
+
+  if s[0] == '+':
+    msg='add {0} with criteria {1}'.format(stockCode,stockCriteria)
+  elif s[0]=='-':
+    msg='remove {0} with criteria {1}'.format(stockCode,stockCriteria)
+  else:
+    msg='{0} with criteria {1}'.format(stockCode,stockCriteria)
+  line_bot_api.reply_message(event.reply_token, TextSendMessage(msg))
 
 def processStock(event, username):
   startTime=time.time()
@@ -223,7 +239,8 @@ def handle_message(event):
         #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=txt))
   elif keyword == 'HELP':
         processHelp(event)
-
+  elif keyword[0]=='+' or keyword[0] == '-':
+      processStock(event,replyUserStr)
   else:
     print ('no key word found. and in else, event.message.text = ',event.message.text)
     print ('call line_bot_api.reply_message('+event.reply_token)

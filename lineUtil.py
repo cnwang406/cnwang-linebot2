@@ -807,8 +807,6 @@ def generateStockByUser(uid, userName, startTime):
   return output
 
 
-
-
 def generateHelpJSON(startTime):
   s="""
       {
@@ -955,3 +953,4 @@ def generateHelpJSON(startTime):
 
   output = s.replace('{timestamp}',datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+' ('+str(round(time.time()- startTime,1))+'s)')
   return output
+
