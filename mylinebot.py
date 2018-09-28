@@ -102,7 +102,7 @@ def processModifyStock(event, username):
   for mn,ms in enumerate(m):
     stockCode=str(ms.groups(0)[0])
     stockCriteria=str(ms.groups(0)[1])
-    print ('re reult=group({0}), {1}.format(mn, ms.groups(0))
+    print ('re reult=group({0}), {1}'.format(mn, ms.groups(0)))
   if s[0] == '+':
     msg='add {0} with criteria {1}'.format(stockCode,stockCriteria)
   elif s[0]=='-':
