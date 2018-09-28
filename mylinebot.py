@@ -108,7 +108,7 @@ def processModifyStock(event, username):
     msg='remove {0} with criteria {1}'.format(stockCode,stockCriteria)
   else:
     msg='{0} with criteria {1}'.format(stockCode,stockCriteria)
-  line_bot_api.reply_message(event.reply_token, TextSendMessage(msg))
+  line_bot_api.reply_message(event.reply_token, TextSendMessage(msg)) 
 
 def processStock(event, username):
   startTime=time.time()
@@ -240,7 +240,7 @@ def handle_message(event):
   elif keyword == 'HELP':
         processHelp(event)
   elif keyword[0]=='+' or keyword[0] == '-':
-      processStock(event,replyUserStr)
+      processModifyStock(event,replyUserStr)
   else:
     print ('no key word found. and in else, event.message.text = ',event.message.text)
     print ('call line_bot_api.reply_message('+event.reply_token)
