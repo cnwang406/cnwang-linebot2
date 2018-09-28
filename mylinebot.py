@@ -96,7 +96,10 @@ stockAddress = 'cnwang406@gmail.com'
 
 def processModifyStock(event, username):
   reStr=r'[+-](.*),(.*)'
+
   s=event.message.text.upper()
+  if s.find(',')==-1 :
+    s +=',*'
   m = re.finditer(reStr, s, re.MULTILINE)
   print ('re--',s)
   for mn,ms in enumerate(m):
