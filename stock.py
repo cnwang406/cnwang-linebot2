@@ -3,6 +3,13 @@ import pandas
 from urllib import request
 import ssl
 import twstock
+
+def getStockName(stockId):
+	s=twstock.realtime.get(stockId)
+	if (s['success']) :
+		return str(s['info']['name'])
+	else:
+		return None
 	
 def getXrate(xrate):
 	url='https://rate.bot.com.tw/xrt?Lang=zh-TW'
