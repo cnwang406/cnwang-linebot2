@@ -831,7 +831,7 @@ def generateHelpJSON(startTime):
           },
           {
             "type": "text",
-            "text": u"可用的指令",
+            "text": "可用的指令",
             "weight": "bold",
             "size": "xxl",
             "margin": "md"
@@ -866,7 +866,7 @@ def generateHelpJSON(startTime):
                   },
                   {
                     "type": "text",
-                    "text": u"說明",
+                    "text": "說明",
                     "size": "sm",
                     "color": "#111111",
                     "flex": 3
@@ -907,7 +907,7 @@ def generateHelpJSON(startTime):
                   },
                   {
                     "type": "text",
-                    "text": u"加 monitor 股票. \n- 刪除. \n三位數 匯率\n, 後面為criteria\n  \t>, <, * ",
+                    "text": "加 monitor 股票. \n- 刪除. \n三位數 匯率\n, 後面為criteria\n  \t>, <, * ",
                     "size": "sm",
                     "color": "#111111",
                     "wrap": true,
@@ -926,27 +926,7 @@ def generateHelpJSON(startTime):
             "type": "separator",
             "margin": "xxl"
           },
-          {
-            "type": "box",
-            "layout": "horizontal",
-            "margin": "md",
-            "contents": [
-              {
-                "type": "text",
-                "text": " ",
-                "size": "xs",
-                "color": "#aaaaaa",
-                "flex": 0
-              },
-              {
-                "type": "text",
-                "text": " ",
-                "color": "#aaaaaa",
-                "size": "xxs",
-                "align": "end"
-              }
-            ]
-          },
+          
           {
             "type": "box",
             "layout": "horizontal",
