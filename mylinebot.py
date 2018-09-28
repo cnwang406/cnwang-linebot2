@@ -98,7 +98,7 @@ def processModifyStock(event, username):
   reStr=r'[+-](.*),(.*)'
   s=event.message.text.upper()
   m = re.finditer(reStr, s, re.MULTILINE)
-  print ('re--')
+  print ('re--',s)
   for mn,ms in enumerate(m):
     stockCode=str(ms.groups(0)[0])
     stockCriteria=str(ms.groups(0)[1])
@@ -115,7 +115,7 @@ def processStock(event, username):
   startTime=time.time()
   par = dbListAllByUserForJSON(event.source.user_id)
 
-  getPrice(par)
+getPrice(par)
   if str(event.reply_token)=='00000000000000000000000000000000' :
     line_bot_api.push_message(lineUid, FlexSendMessage('Stock message is here', json.loads(generateStockJSON(stockHeader,u'小汪汪'+stockTitle,stockAddress,par,startTime))))
   else:
