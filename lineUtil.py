@@ -907,7 +907,7 @@ def generateHelpJSON(startTime):
                   },
                   {
                     "type": "text",
-                    "text": "加 monitor 股票. \n- 刪除. \n三位數 匯率\n, 後面為criteria\n  \t>, <, * ",
+                    "text": "加 monitor 股票. - 刪除. 三位數 匯率, 後面為criteria>, <, * ",
                     "size": "sm",
                     "color": "#111111",
                     "wrap": true,
