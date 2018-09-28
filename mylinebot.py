@@ -73,7 +73,7 @@ handler = WebhookHandler(channelSecret)
 blynkServer='lugia.synology.me:8080'
 blynkAuth='c3ab4ab0345d4d81934600ed4ac1dadc'
 
-
+"""
 currency = [['USD','--','--'],['AUD','--','--'],['CNY','--','--'],['JPY','--','--']]
 
 stock = [[u'中美晶','5483','???','???','???','*','991111'],
@@ -83,7 +83,7 @@ stock = [[u'中美晶','5483','???','???','???','*','991111'],
     ['鴻海','2317','???','???','???','*','119911']]
 
 par = [currency,stock]
-
+"""
 
 #simpleStr= Par2String(par)
 #t=fitFlex2('0','0','0','0','0')
@@ -97,7 +97,7 @@ stockAddress = 'cnwang406@gmail.com'
 def processModifyStock(event, username):
   reStr=r'[+-](.*),(.*)'
   s=event.message.text.upper()
-  m = re.finditer(regex, s, re.MULTILINE)
+  m = re.finditer(reStr, s, re.MULTILINE)
   for mn,ms in enumerate(m):
     stockCode=str(ms.groups(0)[0])
     stockCriteria=str(ms.groups(0)[1])
@@ -231,16 +231,16 @@ def handle_message(event):
       line_bot_api.reply_message( event.reply_token,
         TextSendMessage(text=profileStr))
     else:
-        line_bot_api.reply_message(
-          event.reply_token,
-          TextSendMessage(text='LBA cannot retreive user profile without user_id'))
+      line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text='LBA cannot retreive user profile without user_id'))
   elif keyword == 'LIST':
-        processStockList(event)
+    processStockList(event)
         #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=txt))
   elif keyword == 'HELP':
-        processHelp(event)
+    processHelp(event)
   elif keyword[0]=='+' or keyword[0] == '-':
-      processModifyStock(event,replyUserStr)
+    processModifyStock(event,replyUserStr)
   else:
     print ('no key word found. and in else, event.message.text = ',event.message.text)
     print ('call line_bot_api.reply_message('+event.reply_token)
