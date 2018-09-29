@@ -138,7 +138,7 @@ def processHOME1():
 def processHOME(event):
 
   if event.reply_token=='00000000000000000000000000000000':
-    line_bot_api.push_message(lineUid, FlexSendMessage('welcome',json.loads(generateHomeJSON())))
+    line_bot_api.push_message(lineUid, FlexSendMessage('welcome',json.loads(generateHomeJSON(VERSION))))
   else:
     line_bot_api.reply_message(event.reply_token, FlexSendMessage('welcome',json.loads(generateHomeJSON())))
 
