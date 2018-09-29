@@ -4,13 +4,38 @@ from urllib import request
 import ssl
 import twstock
 
+currency=None
+
 def getStockName(stockId):
 	s=twstock.realtime.get(stockId)
 	if (s['success']) :
 		return str(s['info']['name'])
 	else:
 		return None
-	
+def getXrateNameInit():
+
+	global currency
+	url='https://rate.bot.com.tw/xrt?Lang=zh-TW'
+	context = ssl._create_unverified_context()
+	response = request.urlopen(url, context=context)
+	html = response.read()
+
+	dfs = pandas.read_html(html)
+	#print (dfs[:10])
+	currency = dfs[0]
+	currency = currency.iloc[:,0:5]
+	currency.columns = [u'幣別',u'現金匯率-本行買入',u'現金匯率-本行賣出',u'即期匯率-本行買入',u'即期匯率-本行賣出']
+	currency[u'幣別txt'] = currency[u'幣別'].str.extract('(\w+)')
+	currency[u'幣別'] = currency[u'幣別'].str.extract('\((\w+)\)')
+	print (currency)
+
+def getXrateName(XrateId):
+	d=currency.loc[currency[u'幣別']==XrateId]
+	if (len(d)):
+		return d.iloc[0,5]
+	else:	# no such symbol
+		return '---'
+
 def getXrate(xrate):
 	url='https://rate.bot.com.tw/xrt?Lang=zh-TW'
 	context = ssl._create_unverified_context()
@@ -32,6 +57,10 @@ def getXrate(xrate):
 			xd[1]='---'
 			xd[2]='---'
 
+	#currency = [['USD','美金', --','--','criteria'],['AUD','--','--','criteria'],['CNY','--','--','criteria'],['JPY','--','--','criteria']]
+
+	#stock = [[u'中美晶','5483','成交','漲跌','漲跌幅','*','991111'],
+	
 def getStock(par):
 	lCurrency = par[0]
 	lStock=par[1]

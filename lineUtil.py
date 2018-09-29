@@ -95,21 +95,38 @@ def generateStockJSON(n0,n1,n2,par,startTime):
                   "text": "${ct0}",
                   "size": "sm",
                   "color": "#555555",
-                  "flex": 0
+                  "flex": 1
+                },
+                {
+                  "type": "text",
+                  "text": "${ct3}",
+                  "size": "sm",
+                  "color": "#555555",
+                  "flex": 1
                 },
                 {
                   "type": "text",
                   "text": "${ct1}",
                   "size": "sm",
                   "color": "#111111",
-                  "align": "end"
+                  "align": "end",
+                  "flex":2
                 },
                 {
                   "type": "text",
                   "text": "${ct2}",
                   "size": "sm",
                   "color": "#111111",
-                  "align": "end"
+                  "align": "end",
+                  "flex":2
+                },
+                {
+                  "type": "text",
+                  "text": "${ct4}",
+                  "size": "sm",
+                  "color": "#111111",
+                  "align": "end",
+                  "flex":2
                 }
               ]
             }
@@ -222,14 +239,14 @@ def generateStockJSON(n0,n1,n2,par,startTime):
             "contents": [
               {
                 "type": "text",
-                "text": "data source 台灣銀行 ",
+                "text": "data source  ",
                 "size": "xs",
                 "color": "#aaaaaa",
                 "flex": 0
               },
               {
                 "type": "text",
-                "text": "證交所",
+                "text": "台灣銀行, 證交所",
                 "color": "#aaaaaa",
                 "size": "xxs",
                 "align": "end"
@@ -259,17 +276,20 @@ def generateStockJSON(n0,n1,n2,par,startTime):
           }
         ]
       }
-    }
-
+     }
   """
   target=t0.replace('{0}',n0)
   target=target.replace('{1}',n1)
   target=target.replace('{2}',n2)
+  #  tmpCur=['USD','美金','buy','sell','criteria']
+  #  tmpStk=['中美晶','5483','成交','漲跌','漲跌百分比','criteria','color']
 
   for curc in par[0]:
     stemp=ct.replace('{ct0}',curc[0])
-    stemp=stemp.replace('{ct1}',curc[1])
-    stemp=stemp.replace('{ct2}',curc[2])
+    stemp=stemp.replace('{ct1}',curc[2])
+    stemp=stemp.replace('{ct2}',curc[3])
+    stemp=stemp.replace('{ct3}',curc[1])   # text
+    stemp=stemp.replace('{ct4}',curc[4])    # criteria
     target +=stemp+',\n'
   #if not len(par[0]) :
   #  target +=',\n'
@@ -326,7 +346,7 @@ def generateTempJSON(param,startTime):
     "type": "bubble",
     "hero": {
       "type": "image",
-      "url": "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_1_cafe.png",
+      "url": "https://i.imgur.com/HCtu129.jpg",
       "size": "full",
       "aspectRatio": "20:13",
       "aspectMode": "cover",
@@ -490,7 +510,7 @@ def getHomeTemps(blynkServer, blynkAuth,startTime):
   
   return flexMsg
 
-def generateHomeJSON():
+def generateHomeJSON(VERSION):
   s="""
   {
   "type": "bubble",
@@ -508,7 +528,7 @@ def generateHomeJSON():
   },
   "hero": {
     "type": "image",
-    "url": "https://i.imgur.com/A4oZFLh.png?2",
+    "url": "https://imgur.com/a/kd1Gaf0",
     "size": "full",
     
     "aspectMode": "cover"
@@ -581,19 +601,29 @@ def generateHomeJSON():
   },
   "footer": {
     "type": "box",
-    "layout": "vertical",
+    "layout": "horizontal",
     "contents": [
        {
         "type": "text",
         "text": "by cnwang 2018 ",
         "size": "xs",
         "color": "#aaaaaa",
-        "flex": 0
+        "flex": 3
+        },
+        {
+        "type": "text",
+        "text": "V{VERSION} ",
+        "size": "xs",
+        "align": "end",
+        "color": "#aaaaaa",
+        "flex": 1
         }
+
       ]
     }
   }
   """
+  s=s.replace('{VERSION}',str(VERSION))
   return s
 
 
@@ -650,14 +680,30 @@ def generateStockByUser(uid, userName, startTime):
                     "text": "幣 別",
                     "size": "sm",
                     "color": "#555555",
-                    "flex": 0
+                    "flex": 1
+                  },
+                  {
+                    "type": "text",
+                    "text": "幣 別",
+                    "size": "sm",
+                    "color": "#555555",
+                    "flex": 1
                   },
                   {
                     "type": "text",
                     "text": "匯 率",
                     "size": "sm",
                     "color": "#111111",
-                    "align": "end"
+                    "align": "end",
+                    "flex": 2
+                  },
+                  {
+                    "type": "text",
+                    "text": "條 件",
+                    "size": "sm",
+                    "color": "#111111",
+                    "align": "end",
+                    "flex": 2
                   }
                 ]
               },
@@ -673,14 +719,31 @@ def generateStockByUser(uid, userName, startTime):
                     "text": "{SUBJECT}",
                     "size": "sm",
                     "color": "#555555",
-                    "flex": 0
+                    "flex": 1
+                  },
+                  {
+                    "type": "text",
+                    "text": "{SUBJECTTXT}",
+                    "size": "sm",
+                    "color": "#111111",
+                    "align": "end",
+                    "flex": 1
                   },
                   {
                     "type": "text",
                     "text": "{PRICE}",
                     "size": "sm",
                     "color": "#111111",
-                    "align": "end"
+                    "align": "end",
+                    "flex": 2
+                  },
+                  {
+                    "type": "text",
+                    "text": "{CRITERIA}",
+                    "size": "sm",
+                    "color": "#111111",
+                    "align": "end",
+                    "flex": 2
                   }
                 ]
               },  
@@ -699,14 +762,22 @@ def generateStockByUser(uid, userName, startTime):
                     "text": "股票代碼",
                     "size": "sm",
                     "color": "#555555",
-                    "flex": 0
+                    "flex": 1
+                  },
+                  {
+                    "type": "text",
+                    "text": "股票名稱",
+                    "size": "sm",
+                    "color": "#555555",
+                    "flex": 1
                   },
                   {
                     "type": "text",
                     "text": "條 件",
                     "size": "sm",
                     "color": "#111111",
-                    "align": "end"
+                    "align": "end",
+                    "flex": 4
                   }
                 ]
               },
@@ -721,14 +792,23 @@ def generateStockByUser(uid, userName, startTime):
                     "type": "text",
                     "text": "{SUBJECT}",
                     "size": "sm",
-                    "color": "#555555"
+                    "color": "#555555",
+                    "flex": 1
                   },
                   {
                     "type": "text",
-                    "text": "{PRICE}",
+                    "text": "{SUBJECTTXT}",
+                    "size": "sm",
+                    "color": "#555555",
+                    "flex": 1
+                  },
+                  {
+                    "type": "text",
+                    "text": "{CRITERIA}",
                     "size": "sm",
                     "color": "#111111",
-                    "align": "end"
+                    "align": "end",
+                    "flex": 4
                   }
                 ]
               }
@@ -776,12 +856,13 @@ def generateStockByUser(uid, userName, startTime):
   stockData=dbListAllByUser(uid, 'c')
   print ('Xrate ==',stockData)
   print ('len(stockData)=', len(stockData))
-#sqlStr="SELECT id, type, fid, criteria FROM stocks WHERE (userid = '{0}' AND type='{1}'".format(userId, stype)
+#sqlStr="SELECT id, type, fid, fidtxt, criteria FROM stocks WHERE (userid = '{0}' AND type='{1}'".format(userId, stype)
   count=0
   for sd in stockData:
     output += ct1
     output=output.replace('{SUBJECT}', sd[2])
-    output=output.replace('{PRICE}', sd[3])
+    output=output.replace('{PRICE}', sd[4])
+    output=output.replace('{SUBJECTTXT}', sd[3])
     count+=1
     print ('round ',count)
     #if count <= len(stockData):
@@ -791,12 +872,13 @@ def generateStockByUser(uid, userName, startTime):
   output+=sep
   stockData=dbListAllByUser (uid, 's')
 
-#sqlStr="SELECT id, type, fid, criteria FROM stocks WHERE (userid = '{0}' AND type='{1}'".format(userId, stype)
+#sqlStr="SELECT id, type, fid, fidtxt, criteria FROM stocks WHERE (userid = '{0}' AND type='{1}'".format(userId, stype)
   count=0
   for sd in stockData:
     output += st1
     output=output.replace('{SUBJECT}', sd[2])
-    output=output.replace('{PRICE}', sd[3])
+    output=output.replace('{PRICE}', sd[4])
+    output=output.replace('{SUBJECTTXT}', sd[3])
     count+=1
     if count< len(stockData):
       output+=','

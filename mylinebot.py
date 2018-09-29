@@ -4,13 +4,14 @@ TITLE=(
 """
 ***************************************************
 **                                               **
-**      Line Bot  V0.27                          **
+**      Line Bot  V0.28                          **
 **                cnwang. 2018/09                **
 ***************************************************
 
 """
 )  
 
+VERSION = 0.28
 
 import json
 from flask import Flask,  abort
@@ -132,7 +133,7 @@ def processStatus(event):
     line_bot_api.reply_message(event.reply_token, FlexSendMessage('home temperature is here', json.loads(getHomeTemps(blynkServer, blynkAuth,startTime))))
 
 def processHOME1():
-    line_bot_api.push_message(lineUid, FlexSendMessage('welcome',json.loads(generateHomeJSON())))
+    line_bot_api.push_message(lineUid, FlexSendMessage('welcome',json.loads(generateHomeJSON(VERSION))))
 
 def processHOME(event):
 
@@ -161,12 +162,12 @@ def getUserName(event):
 
 
 
-welcomeStr="""
-***********************
-  小汪汪	          
-************* V0.27 ***
+welcomeStr='\
+***********************\n\
+  小汪汪	          \n\
+************* V'+str(VERSION)+ ' ***'
 
-"""
+
 line_bot_api.push_message(lineUid, TextSendMessage(welcomeStr))
 
 #processStatus()
