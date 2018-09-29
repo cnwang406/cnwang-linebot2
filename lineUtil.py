@@ -763,7 +763,7 @@ def generateStockByUser(uid, userName, startTime):
                     "text": "股",
                     "size": "sm",
                     "color": "#555555",
-                    "flex": 1
+                    "flex": 2
                   },
                   {
                     "type": "text",
@@ -802,7 +802,7 @@ def generateStockByUser(uid, userName, startTime):
                     "text": "{SUBJECT}",
                     "size": "sm",
                     "color": "#555555",
-                    "flex": 1
+                    "flex": 2
                   },
                   {
                     "type": "text",
@@ -878,7 +878,7 @@ def generateStockByUser(uid, userName, startTime):
   for sd in stockData:
     output += ct1
     output=output.replace('{SUBJECT}', sd[2])
-    output=output.replace('{PRICE}', getStockById(sd[2]))
+    output=output.replace('{PRICE}', getXrateById(sd[2]))
     output=output.replace('{SUBJECTTXT}', sd[3])
     output=output.replace('{CRITERIA}', sd[4])
     count+=1
