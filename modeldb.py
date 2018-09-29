@@ -91,7 +91,7 @@ def dbListAllByUserForJSON(userId):
 
 	for s in stkr:
 		tmpStk[1]=s[2]
-		tmpStk[5]=s[5]
+		tmpStk[5]=s[4]
 		if tmpStk[5]=='' : tmpStk[5]='*'
 		tmpStkL.append(list(tmpStk))
 	output = [tmpCurL, tmpStkL]

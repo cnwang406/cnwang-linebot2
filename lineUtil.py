@@ -528,7 +528,7 @@ def generateHomeJSON(VERSION):
   },
   "hero": {
     "type": "image",
-    "url": "https://imgur.com/a/kd1Gaf0",
+    "url": "https://imgur.com/1KrUSjd",
     "size": "full",
     
     "aspectMode": "cover"
