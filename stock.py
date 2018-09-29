@@ -57,9 +57,44 @@ def getXrate(xrate):
 			xd[1]='---'
 			xd[2]='---'
 
+
+
+
+def getXrateById(xrateId):
+	url='https://rate.bot.com.tw/xrt?Lang=zh-TW'
+	context = ssl._create_unverified_context()
+	response = request.urlopen(url, context=context)
+	html = response.read()
+
+	dfs = pandas.read_html(html)
+	#print (dfs[:10])
+	currency = dfs[0]
+	currency = currency.ix[:,0:5]
+	currency.columns = [u'幣別',u'現金匯率-本行買入',u'現金匯率-本行賣出',u'即期匯率-本行買入',u'即期匯率-本行賣出']
+	currency[u'幣別'] = currency[u'幣別'].str.extract('\((\w+)\)')
+
+	d=(currency.loc[currency[u'幣別']==xrateId])
+	if (len(d)):
+		output =d.iloc[0,1]
+
+	else:	# no such symbol
+		output='---'
+	return output
+
+
 	#currency = [['USD','美金', --','--','criteria'],['AUD','--','--','criteria'],['CNY','--','--','criteria'],['JPY','--','--','criteria']]
 
 	#stock = [[u'中美晶','5483','成交','漲跌','漲跌幅','*','991111'],
+
+def getStockById(stockId):
+
+	s = twstock.realtime.get(stockId)
+	if (s['success']):
+		output = s['realtime']['latest_trade_price']
+	else:
+		output = '---'
+	return output	
+
 	
 def getStock(par):
 	lCurrency = par[0]

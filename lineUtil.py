@@ -3,6 +3,7 @@ import time
 from blynkutil import (blynkGetPinValue, blynkGetPinHistoryValue)
 import datetime
 from modeldb import (dbListAllByUser, dbAddbyUser, dbCheckExist)
+from stock import (getXrateById, getStockById)
 
 RED='AA0000'
 GREEN='00AA01'  
@@ -677,14 +678,14 @@ def generateStockByUser(uid, userName, startTime):
                 "contents": [
                   {
                     "type": "text",
-                    "text": "幣 別",
+                    "text": "幣 ",
                     "size": "sm",
                     "color": "#555555",
                     "flex": 1
                   },
                   {
                     "type": "text",
-                    "text": "幣 別",
+                    "text": " 別",
                     "size": "sm",
                     "color": "#555555",
                     "flex": 1
@@ -759,17 +760,25 @@ def generateStockByUser(uid, userName, startTime):
                 "contents": [
                   {
                     "type": "text",
-                    "text": "股票代碼",
+                    "text": "股",
                     "size": "sm",
                     "color": "#555555",
                     "flex": 1
                   },
                   {
                     "type": "text",
-                    "text": "股票名稱",
+                    "text": "票",
                     "size": "sm",
                     "color": "#555555",
                     "flex": 1
+                  },
+                  {
+                    "type": "text",
+                    "text": "參考市價",
+                    "size": "sm",
+                    "color": "#111111",
+                    "align": "end",
+                    "flex": 2
                   },
                   {
                     "type": "text",
@@ -801,6 +810,14 @@ def generateStockByUser(uid, userName, startTime):
                     "size": "sm",
                     "color": "#555555",
                     "flex": 1
+                  },
+                  {
+                    "type": "text",
+                    "text": "{PRICE}",
+                    "size": "sm",
+                    "color": "#111111",
+                    "align": "end",
+                    "flex": 2
                   },
                   {
                     "type": "text",
@@ -861,8 +878,9 @@ def generateStockByUser(uid, userName, startTime):
   for sd in stockData:
     output += ct1
     output=output.replace('{SUBJECT}', sd[2])
-    output=output.replace('{PRICE}', sd[4])
+    output=output.replace('{PRICE}', getStockById(sd[2]))
     output=output.replace('{SUBJECTTXT}', sd[3])
+    output=output.replace('{CRITERIA}', sd[4])
     count+=1
     print ('round ',count)
     #if count <= len(stockData):
@@ -877,8 +895,9 @@ def generateStockByUser(uid, userName, startTime):
   for sd in stockData:
     output += st1
     output=output.replace('{SUBJECT}', sd[2])
-    output=output.replace('{PRICE}', sd[4])
+    output=output.replace('{PRICE}', getStockById(sd[2]))
     output=output.replace('{SUBJECTTXT}', sd[3])
+    output=output.replace('{CRITERIA}', sd[4])
     count+=1
     if count< len(stockData):
       output+=','
