@@ -329,10 +329,6 @@ def generateStockJSON(n0,n1,n2,par,startTime):
 
   target+=t2.replace('{3}', pDate+' ('+str(periodTime)+'s)')
 
-  print (target)
-
-  #  print (target)
-
   return target
 
 
@@ -774,7 +770,7 @@ def generateStockByUser(uid, userName, startTime):
                     "text": "股",
                     "size": "sm",
                     "color": "#555555",
-                    "flex": 2
+                    "flex": 1
                   },
                   {
                     "type": "text",
@@ -789,7 +785,7 @@ def generateStockByUser(uid, userName, startTime):
                     "size": "sm",
                     "color": "#111111",
                     "align": "end",
-                    "flex": 2
+                    "flex": 1
                   },
                   {
                     "type": "text",
@@ -797,7 +793,7 @@ def generateStockByUser(uid, userName, startTime):
                     "size": "sm",
                     "color": "#111111",
                     "align": "end",
-                    "flex": 4
+                    "flex": 2
                   }
                 ]
               },
@@ -813,7 +809,7 @@ def generateStockByUser(uid, userName, startTime):
                     "text": "{SUBJECT}",
                     "size": "sm",
                     "color": "#555555",
-                    "flex": 2
+                    "flex": 1
                   },
                   {
                     "type": "text",
@@ -828,15 +824,15 @@ def generateStockByUser(uid, userName, startTime):
                     "size": "sm",
                     "color": "#111111",
                     "align": "end",
-                    "flex": 2
+                    "flex": 1
                   },
                   {
                     "type": "text",
                     "text": "{CRITERIA}",
-                    "size": "sm",
+                    "size": "xxs",
                     "color": "#111111",
                     "align": "end",
-                    "flex": 4
+                    "flex": 2
                   }
                 ]
               }
@@ -882,9 +878,7 @@ def generateStockByUser(uid, userName, startTime):
   output=output.replace('{ADDR}', 'cnwang406@gmail.com')
 
   stockData=dbListAllByUser(uid, 'c')
-  print ('Xrate ==',stockData)
-  print ('len(stockData)=', len(stockData))
-  #sqlStr="SELECT id, type, fid, fidtxt, criteria FROM stocks WHERE (userid = '{0}' AND type='{1}'".format(userId, stype)
+# #sqlStr="SELECT id, type, fid, fidtxt, criteria FROM stocks WHERE (userid = '{0}' AND type='{1}'".format(userId, stype)
   count=0
   for sd in stockData:
     output += ct1
@@ -893,11 +887,7 @@ def generateStockByUser(uid, userName, startTime):
     output=output.replace('{SUBJECTTXT}', sd[3])
     output=output.replace('{CRITERIA}', sd[4])
     count+=1
-    print ('round ',count)
-    #if count <= len(stockData):
-    #  print (' add ,')
-    #output+=','
-
+ 
   output+=sep
   stockData=dbListAllByUser (uid, 's')
 
@@ -915,7 +905,7 @@ def generateStockByUser(uid, userName, startTime):
 
   output+=ft1 
   output=output.replace('{timestamp}',datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+' ('+str(round(time.time()- startTime,1))+'s)')
-  print(output)
+
   return output
 
 
