@@ -113,14 +113,20 @@ def dbAddByUser(param):
 		print ('exist, update, update criteria from {0} to {1}'.format(ck[4],param['criteria']))
 		sqlStr = "UPDATE stocks SET criteria='{0}' WHERE ID ='{1}'".format(param['criteria'],ck[0])
 
-	print ('dbAddbyUser = ',sqlStr)
-	
+	print ('calling dbUpdateBySQL({0})'.format(sqlStr))
+	dbUpdateBySQL(sqlStr)
+	print ('------ done')
+	print(dbDumpAll())
+
 def dbRemoveByUser(param):
 	con=dbConn
 	sqlStr="DELETE FROM stocks WHERE userid='{userid}' AND id='{id}'".format(
 		userid=param['userid'],
 		id=param['id'])
-	print ('dbremoveByUser = ',sqlStr)
+	print ('calling dbUpdateBySQL({0})'.format(sqlStr))
+	dbUpdateBySQL(sqlStr)
+	print ('------ done')
+	print(dbDumpAll())
 
 def dbUpdateBySQL(sqlStr):
 	con=dbConn()
@@ -147,7 +153,7 @@ def dbCheckExist(param):
 	ver=cur.fetchone()
 	print (ver)
 	con.close() 
-	if (len(ver)==0) :
+	if (len(list(ver))==0) :
 		return None
 	else:
 		return ver[0]
