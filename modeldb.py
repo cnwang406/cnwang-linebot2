@@ -153,7 +153,7 @@ def dbCheckExist(param):
 	ver=cur.fetchone()
 	print (ver)
 	con.close() 
-	if (len(list(ver))==0) :
+	if ver :
 		return None
 	else:
 		return ver[0]
