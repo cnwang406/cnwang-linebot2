@@ -64,22 +64,32 @@ def generateStockJSON(n0,n1,n2,par,startTime):
                     "type": "text",
                     "text": "dollars",
                     "size": "sm",
-                    "color": "#555555",
-                    "flex": 0
+                    "color": "#111111",
+                    "flex": 2
                   },
                   {
                     "type": "text",
                     "text": "buy",
                     "size": "sm",
                     "color": "#111111",
-                    "align": "end"
+                    "align": "end",
+                    "flex": 1
                   },
                   {
                     "type": "text",
                     "text": "sell",
                     "size": "sm",
                     "color": "#111111",
-                    "align": "end"
+                    "align": "end",
+                    "flex": 1
+                  },
+                  {
+                    "type": "text",
+                    "text": "CRITERIA",
+                    "size": "xxs",
+                    "color": "#111111",
+                    "align": "end",
+                    "flex": 2
                   }
                 ]
               },
@@ -93,38 +103,38 @@ def generateStockJSON(n0,n1,n2,par,startTime):
 
                 {
                   "type": "text",
-                  "text": "${ct0}",
+                  "text": "{XID}",
                   "size": "sm",
                   "color": "#555555",
                   "flex": 1
                 },
                 {
                   "type": "text",
-                  "text": "${ct3}",
+                  "text": "{XIDTXT}",
                   "size": "sm",
                   "color": "#555555",
                   "flex": 1
                 },
                 {
                   "type": "text",
-                  "text": "${ct1}",
+                  "text": "{XBUY}",
                   "size": "sm",
                   "color": "#111111",
                   "align": "end",
-                  "flex":2
+                  "flex":1
                 },
                 {
                   "type": "text",
-                  "text": "${ct2}",
+                  "text": "{XSELL}",
                   "size": "sm",
                   "color": "#111111",
                   "align": "end",
-                  "flex":2
+                  "flex":1
                 },
                 {
                   "type": "text",
-                  "text": "${ct4}",
-                  "size": "sm",
+                  "text": "{XCRITERIA}",
+                  "size": "xxs",
                   "color": "#111111",
                   "align": "end",
                   "flex":2
@@ -286,11 +296,11 @@ def generateStockJSON(n0,n1,n2,par,startTime):
   #  tmpStk=['中美晶','5483','成交','漲跌','漲跌百分比','criteria','color']
 
   for curc in par[0]:
-    stemp=ct.replace('{ct0}',curc[0])
-    stemp=stemp.replace('{ct1}',curc[2])
-    stemp=stemp.replace('{ct2}',curc[3])
-    stemp=stemp.replace('{ct3}',curc[1])   # text
-    stemp=stemp.replace('{ct4}',curc[4])    # criteria
+    stemp=ct.replace('{XID}',curc[0])
+    stemp=stemp.replace('{XIDTXT}',curc[1])
+    stemp=stemp.replace('{XBUY}',curc[2])
+    stemp=stemp.replace('{XSELL}',curc[3])   # text
+    stemp=stemp.replace('{XCRITERIA}',curc[4])    # criteria
     target +=stemp+',\n'
   #if not len(par[0]) :
   #  target +=',\n'
