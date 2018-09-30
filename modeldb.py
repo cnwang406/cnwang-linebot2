@@ -106,12 +106,13 @@ def dbAddByUser(param):
 	ck=dbCheckExist(param)
 	
 	if (not ck) :
+		param['id']=ck
 		sqlStr = "INSERT INTO stocks (userid, type, fid, fidtxt, criteria) VALUES ('{userid}', '{type}', '{fid}', '{fidtxt}','{criteria}')".format(
 				userid=param['userid'], type=param['type'], fid=param['fid'], fidtxt=param['fidtxt'],
 				criteria=param['criteria'])
 	else :
-		print ('exist, update, update criteria from {0} to {1}'.format(ck[4],param['criteria']))
-		sqlStr = "UPDATE stocks SET criteria='{0}' WHERE ID ='{1}'".format(param['criteria'],ck[0])
+		print ('exist, update, update criteria from {0} to {1}'.format('I don\'t know now',param['criteria']))
+		sqlStr = "UPDATE stocks SET criteria='{0}' WHERE ID ='{1}'".format(param['criteria'],ck)
 
 	print ('calling dbUpdateBySQL({0})'.format(sqlStr))
 	dbUpdateBySQL(sqlStr)
@@ -143,7 +144,6 @@ def dbUpdateBySQL(sqlStr):
 			con.close()
 		print ('modeldb: dbUpdateBySQL : done')
 	return success
-
 
 def dbCheckExist(param):
 	sqlStr = "SELECT * FROM stocks WHERE userid='{0}' and fid='{1}'".format(param['userid'],param['fid'])
