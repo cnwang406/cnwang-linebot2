@@ -3,7 +3,7 @@ import time
 from blynkutil import (blynkGetPinValue, blynkGetPinHistoryValue)
 import datetime
 from modeldb import (dbListAllByUser, dbAddbyUser, dbCheckExist)
-from stock import (getXrateById, getStockById)
+from stock import (getXrateById, getStockById,getXrateName, getXrateName)
 
 RED='AA0000'
 GREEN='00AA01'  
@@ -873,7 +873,7 @@ def generateStockByUser(uid, userName, startTime):
   stockData=dbListAllByUser(uid, 'c')
   print ('Xrate ==',stockData)
   print ('len(stockData)=', len(stockData))
-#sqlStr="SELECT id, type, fid, fidtxt, criteria FROM stocks WHERE (userid = '{0}' AND type='{1}'".format(userId, stype)
+  #sqlStr="SELECT id, type, fid, fidtxt, criteria FROM stocks WHERE (userid = '{0}' AND type='{1}'".format(userId, stype)
   count=0
   for sd in stockData:
     output += ct1
@@ -890,7 +890,7 @@ def generateStockByUser(uid, userName, startTime):
   output+=sep
   stockData=dbListAllByUser (uid, 's')
 
-#sqlStr="SELECT id, type, fid, fidtxt, criteria FROM stocks WHERE (userid = '{0}' AND type='{1}'".format(userId, stype)
+  #sqlStr="SELECT id, type, fid, fidtxt, criteria FROM stocks WHERE (userid = '{0}' AND type='{1}'".format(userId, stype)
   count=0
   for sd in stockData:
     output += st1
@@ -1055,3 +1055,5 @@ def generateHelpJSON(startTime):
   output = s.replace('{timestamp}',datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+' ('+str(round(time.time()- startTime,1))+'s)')
   return output
 
+def updateStock(param):
+  pass
