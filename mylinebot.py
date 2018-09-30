@@ -110,8 +110,8 @@ def processModifyStock(event, username):
     else:
       msg = '刪除 '
     msg += '股票 {0} ,{1}'.format(m[0][1],m[0][2]) 
-    paramStk['fid'],paramStk['fidtxt'],paramStk['criteria']=(
-      m[0][1],'FIDTXT',m[0][2]
+    paramStk['fid'],paramStk['fidtxt'],paramStk['criteria'],paramStk['action'],paramStk['type']=(
+      m[0][1],'FIDTXT',m[0][2],'-','s'
       )
 
   elif re.findall(reStrXrate, s):
@@ -121,14 +121,14 @@ def processModifyStock(event, username):
     else:
       msg = '刪除 '
     msg +='匯率 {0},{1}'.format(m[0][1],m[0][2]) 
+    paramStk['fid'],paramStk['fidtxt'],paramStk['criteria'],paramStk['action'],paramStk['type']=(
+      m[0][1],'FIDTXT',m[0][2],'-','c'
+      )
 
   else :
     msg = 'sorry, {0} 看不出是股票(dddd)還是貨幣(aaa)'.format(s)
 
   print (msg)
-  paramStk['fid'],paramStk['fidtxt'],paramStk['criteria']=(
-      m[0][1],'FIDTXT',m[0][2]
-      )
   print (paramStk)
   updateStock(paramStk)
   """
