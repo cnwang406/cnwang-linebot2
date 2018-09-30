@@ -16,6 +16,7 @@ def getStockName(stockId):
 def getXrateInit():
 
 	global currency
+	global currencyTimestamp
 	url='https://rate.bot.com.tw/xrt?Lang=zh-TW'
 	context = ssl._create_unverified_context()
 	response = request.urlopen(url, context=context)
@@ -29,13 +30,15 @@ def getXrateInit():
 	currency[u'幣別txt'] = currency[u'幣別'].str.extract('(\w+)')
 	currency[u'幣別'] = currency[u'幣別'].str.extract('\((\w+)\)')
 	currencyTimestamp=time.time()
-	print (currency)
+	#print (currency)
 
 def checkCurrencyUpdated():
 	if not currencyTimestamp:	#not initilized
 		getXrateInit()
+		print ('Currenct not initialized. Start to initialized')
 	else :				# need to check timestampe
 		if (time.time()-currencyTimestamp)>600: 	# 10 min update
+			print ('Currenct is outdated. ({0}s) reload'.format(time.time()-currencyTimestamp)) 
 			getXrateInit()
 
 def getXrateName(XrateId):
