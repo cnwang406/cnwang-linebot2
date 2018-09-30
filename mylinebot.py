@@ -85,7 +85,7 @@ def processModifyStock(event, username):
   s=event.message.text.upper()
 
   paramStk = dict(
-    userid=event.userid,
+    userid=event.source.user_id,
     type = 's',
     fid='',
     criteria='',
