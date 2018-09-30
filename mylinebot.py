@@ -74,22 +74,6 @@ handler = WebhookHandler(channelSecret)
 blynkServer='lugia.synology.me:8080'
 blynkAuth='c3ab4ab0345d4d81934600ed4ac1dadc'
 
-"""
-currency = [['USD','--','--'],['AUD','--','--'],['CNY','--','--'],['JPY','--','--']]
-
-stock = [[u'中美晶','5483','???','???','???','*','991111'],
-		['UMC','2303','???','???','???','>20','119911'],
-		['TSMC','2330','???','???','???','<200','991111'],
-		['大力光','3008','???','???','???','*','119911'],
-    ['鴻海','2317','???','???','???','*','119911']]
-
-par = [currency,stock]
-"""
-
-#simpleStr= Par2String(par)
-#t=fitFlex2('0','0','0','0','0')
-#print (t)
-
 stockHeader = u'匯率股票訊息'
 stockTitle = u' 問的'
 stockAddress = 'cnwang406@gmail.com'
@@ -100,19 +84,34 @@ def processModifyStock(event, username):
   reStrXrate=r'([+-])(...),(.*)'
   s=event.message.text.upper()
 
+  paramStk = dict(
+    userid=event.userid,
+    type = 's',
+    fid='',
+    criteria='',
+    fidtxt='',
+    action='')
+
+
   #regex is not familiar. So use dumb method.
   if s.find(',')==-1 :
     s +=',*'
   if (s[0] !='+' and s[1]!='-') :
     s='+'+s
 
+  paramStk['action']=s[0]
+
   if (re.findall(reStrStk, s)):  
     m=re.findall(reStrStk, s)
     if (m[0][0]=='+'):
       msg = '增加/修改 '
+
     else:
       msg = '刪除 '
-    msg += '股票 {0},{1}'.format(m[0][1],m[0][2]) 
+    msg += '股票 {0} ,{1}'.format(m[0][1],m[0][2]) 
+    paramStk['fid'],paramStk['fidtxt'],paramStk['criteria']=(
+      m[0][1],'FIDTXT',m[0][2]
+      )
 
   elif re.findall(reStrXrate, s):
     m=re.findall(reStrXrate, s)
@@ -123,10 +122,13 @@ def processModifyStock(event, username):
     msg +='匯率 {0},{1}'.format(m[0][1],m[0][2]) 
 
   else :
-    msg = 'sorry, {0} 看不出是股票還是貨幣'.format(s)
-  print ('re--',s)
-  print (msg)
+    msg = 'sorry, {0} 看不出是股票(dddd)還是貨幣(aaa)'.format(s)
 
+  print (msg)
+  paramStk['fid'],paramStk['fidtxt'],paramStk['criteria']=(
+      m[0][1],'FIDTXT',m[0][2]
+      )
+  print (paramStk)
   """
   addStk= dict(
   userid = event.userid,
