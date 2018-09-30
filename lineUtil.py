@@ -1075,6 +1075,7 @@ def updateStock(paramStk):
   fidExist = dbCheckExist(paramStk)
 
   if (fidExist) :
+    paramStk['id']=fidExist['id']
     print ('#{2}, {0} ({1}) exist'.format(paramStk['fid'],paramStk['fidtxt'], paramStk['id']))
     if paramStk['action']=='+':
       print ('UPDATE')
