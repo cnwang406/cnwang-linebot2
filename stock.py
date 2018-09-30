@@ -3,16 +3,17 @@ import pandas
 from urllib import request
 import ssl
 import twstock
+import time
 
 currency=None
-
+currencyTimestamp=None
 def getStockName(stockId):
 	s=twstock.realtime.get(stockId)
 	if (s['success']) :
 		return str(s['info']['name'])
 	else:
 		return None
-def getXrateNameInit():
+def getXrateInit():
 
 	global currency
 	url='https://rate.bot.com.tw/xrt?Lang=zh-TW'
@@ -27,9 +28,18 @@ def getXrateNameInit():
 	currency.columns = [u'幣別',u'現金匯率-本行買入',u'現金匯率-本行賣出',u'即期匯率-本行買入',u'即期匯率-本行賣出']
 	currency[u'幣別txt'] = currency[u'幣別'].str.extract('(\w+)')
 	currency[u'幣別'] = currency[u'幣別'].str.extract('\((\w+)\)')
+	currencyTimestamp=time.time()
 	print (currency)
 
+def checkCurrencyUpdated():
+	if not currency:	#not initilized
+		getXrateInit()
+	else :				# need to check timestampe
+		if (time.time()-currencyTimestamp)>600: 	# 10 min update
+			getXrateNameInit()
+
 def getXrateName(XrateId):
+	checkCurrencyUpdated()
 	d=currency.loc[currency[u'幣別']==XrateId]
 	if (len(d)):
 		return d.iloc[0,5]
@@ -37,6 +47,8 @@ def getXrateName(XrateId):
 		return '---'
 
 def getXrate(xrate):
+	checkCurrencyUpdated()
+	"""
 	url='https://rate.bot.com.tw/xrt?Lang=zh-TW'
 	context = ssl._create_unverified_context()
 	response = request.urlopen(url, context=context)
@@ -46,16 +58,22 @@ def getXrate(xrate):
 	#print (dfs[:10])
 	currency = dfs[0]
 	currency = currency.ix[:,0:5]
-	currency.columns = [u'幣別',u'現金匯率-本行買入',u'現金匯率-本行賣出',u'即期匯率-本行買入',u'即期匯率-本行賣出']
+	currency.columns = [u'幣別',u'現金匯率-本行買入',u'現金匯率-本行賣出',u'即期匯率-本行買入',u'即期匯率-本行賣出','幣別txt']
 	currency[u'幣別'] = currency[u'幣別'].str.extract('\((\w+)\)')
+	"""
+
+	#['JPY', '0.2599', '0.2727', 'sell', '*']
 	for xd in xrate[0]:
 		d=(currency.loc[currency[u'幣別']==xd[0]])
 		if (len(d)):
-			xd[1]=d.iloc[0,1]
-			xd[2]=d.iloc[0,2]
+			xd[1]=d.iloc[0,5]
+			xd[2]=d.iloc[0,1]
+			xd[3]=d.iloc[0,2]
 		else:	# no such symbol
 			xd[1]='---'
 			xd[2]='---'
+			xd[3]='---'
+			xd[4]=''
 
 
 def getXrateById(xrateId):
@@ -141,5 +159,4 @@ def getPrice(par):
 	getXrate(par)
 	getStock(par)	
 	print (par)
-
-getXrateNameInit()
+	
