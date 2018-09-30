@@ -106,23 +106,27 @@ def processModifyStock(event, username):
     m=re.findall(reStrStk, s)
     if (m[0][0]=='+'):
       msg = '增加/修改 '
+      paramStk['action']='+'
 
     else:
       msg = '刪除 '
+      paramStk['action']='-'
     msg += '股票 {0} ,{1}'.format(m[0][1],m[0][2]) 
-    paramStk['fid'],paramStk['fidtxt'],paramStk['criteria'],paramStk['action'],paramStk['type']=(
-      m[0][1],'FIDTXT',m[0][2],'-','s'
+    paramStk['fid'],paramStk['fidtxt'],paramStk['criteria'],paramStk['type']=(
+      m[0][1],'FIDTXT',m[0][2],'s'
       )
 
   elif re.findall(reStrXrate, s):
     m=re.findall(reStrXrate, s)
     if (m[0][0]=='+'):
       msg = '增加/修改 '
+      paramStk['action']='+'
     else:
       msg = '刪除 '
+      paramStk['action']='-'
     msg +='匯率 {0},{1}'.format(m[0][1],m[0][2]) 
-    paramStk['fid'],paramStk['fidtxt'],paramStk['criteria'],paramStk['action'],paramStk['type']=(
-      m[0][1],'FIDTXT',m[0][2],'-','c'
+    paramStk['fid'],paramStk['fidtxt'],paramStk['criteria'],paramStk['type']=(
+      m[0][1],'FIDTXT',m[0][2],'c'
       )
 
   else :
