@@ -133,7 +133,7 @@ def processModifyStock(event, username):
     msg = 'sorry, {0} 看不出是股票(dddd)還是貨幣(aaa)'.format(s)
 
   print (msg)
-  print (paramStk)
+
   updateStock(paramStk)
   """
   addStk= dict(
