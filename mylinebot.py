@@ -120,7 +120,6 @@ def processModifyStock(event, username):
       msg = '增加/修改 '
     else:
       msg = '刪除 '
-    m=re.findall(reStrStk, s)
     msg +='匯率 {0},{1}'.format(m[0][1],m[0][2]) 
 
   else :
