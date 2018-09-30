@@ -329,6 +329,7 @@ def generateStockJSON(n0,n1,n2,par,startTime):
 
   target+=t2.replace('{3}', pDate+' ('+str(periodTime)+'s)')
 
+  print (target)
 
   #  print (target)
 
