@@ -32,11 +32,11 @@ def getXrateInit():
 	print (currency)
 
 def checkCurrencyUpdated():
-	if not currency:	#not initilized
+	if not currencyTimestamp:	#not initilized
 		getXrateInit()
 	else :				# need to check timestampe
 		if (time.time()-currencyTimestamp)>600: 	# 10 min update
-			getXrateNameInit()
+			getXrateInit()
 
 def getXrateName(XrateId):
 	checkCurrencyUpdated()

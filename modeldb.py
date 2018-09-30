@@ -117,7 +117,9 @@ def dbAddByUser(param):
 	
 def dbRemoveByUser(param):
 	con=dbConn
-	sqlStr="DELETE FROM stocks WHERE userid='{userid}' AND id='{id}'".format(param['userid'],param['id'])
+	sqlStr="DELETE FROM stocks WHERE userid='{userid}' AND id='{id}'".format(
+		userid=param['userid'],
+		id=param['id'])
 	print ('dbremoveByUser = ',sqlStr)
 
 def dbUpdateBySQL(sqlStr):
