@@ -103,30 +103,23 @@ def dbListAllByUserForJSON(userId):
 def dbAddbyUser(param):
 	#print (param['userid'])
 	con=dbConn()
-	sqlStr = "INSERT INTO stocks (userid, type, fid, fidtxt, criteria) VALUES ('{userid}', '{type}', '{fid}', '{fidtxt}','{criteria}')".format(
+	ck=dbCheckExist(param)
+	print ('add Sql = ', sqlStr)
+	
+	if (not ck) :
+		sqlStr = "INSERT INTO stocks (userid, type, fid, fidtxt, criteria) VALUES ('{userid}', '{type}', '{fid}', '{fidtxt}','{criteria}')".format(
 				userid=param['userid'], type=param['type'], fid=param['fid'], fidtxt=param['fidtxt'],
 				criteria=param['criteria'])
-	print ('Sql = ', sqlStr)
-	ck=dbCheckExist(param)
-
-	if (not ck) :
-		print ('execute')
-		
 	else :
 		print ('exist, update, update criteria from {0} to {1}'.format(ck[4],param['criteria']))
 		sqlStr = "UPDATE stocks SET criteria='{0}' WHERE ID ='{1}'".format(param['criteria'],ck[0])
-		print ('sqlStr = ',sqlStr)
-	try:
-		cur = con.cursor()
-		cur.execute(sqlStr)
-		con.commit()	
-	except psycopg2.DatabaseError as e:
-		con.rollback()
-	finally:
-		if con:
-			con.close()
 
+	print ('dbAddbyUser = ',sqlStr)
 	
+def dbRemoveByUser(param):
+	con=dbConn
+	sqlStr="DELETE FROM stocks WHERE userid='{userid}' AND id='{id}'".format(param['userid'],param['id'])
+	print ('dbremoveByUser = ',sqlStr)
 
 def dbUpdateBySQL(sqlStr):
 	con=dbConn()

@@ -35,7 +35,7 @@ from linebot.models import (
 from linebot import (LineBotApi, WebhookHandler)
 from linebot.exceptions import (InvalidSignatureError)
 #from lineutil import generateStockJSON,getHomeTemps, sendHOME
-from lineUtil import (getHomeTemps,generateStockJSON,generateHomeJSON,generateStockByUser,generateHelpJSON)
+from lineUtil import (getHomeTemps,generateStockJSON,generateHomeJSON,generateStockByUser,generateHelpJSON,updateStock)
 from stock import getPrice
 
 import datetime
@@ -85,6 +85,7 @@ def processModifyStock(event, username):
   s=event.message.text.upper()
 
   paramStk = dict(
+    id=9999,
     userid=event.source.user_id,
     type = 's',
     fid='',
@@ -129,6 +130,7 @@ def processModifyStock(event, username):
       m[0][1],'FIDTXT',m[0][2]
       )
   print (paramStk)
+  updateStock(paramStk)
   """
   addStk= dict(
   userid = event.userid,
