@@ -154,9 +154,9 @@ def dbCheckExist(param):
 	print (ver)
 	con.close() 
 	if ver :
-		return None
-	else:
 		return ver[0]
+	else:
+		return None
 
 	
 
