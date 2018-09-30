@@ -1092,3 +1092,125 @@ def updateStock(paramStk):
       print ('CANNOT REMOVE.')
 
     
+
+
+def generateYesNoBox(param):
+  s= """
+  {
+  "type": "bubble",
+  "styles": {
+    "footer": {
+      "separator": true
+    }
+  },
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      
+      {
+        "type": "text",
+        "text": "Finance",
+        "weight": "bold",
+        "color": "#1DB446",
+        "size": "sm"
+      },
+      {
+        "type": "text",
+        "text": "{",
+        "weight": "bold",
+        "size": "xxl",
+        "margin": "md"
+      },
+      {
+        "type": "text",
+        "text": "cnwang406@gmail.com",
+        "size": "xs",
+        "color": "#aaaaaa",
+        "wrap": true
+      },
+      {
+        "type": "separator",
+        "margin": "xxl"
+      },
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "margin": "xxl",
+        "spacing": "sm",
+        "contents": [
+          {
+        "type": "text",
+        "text": "{SQLSTR}",
+        "size": "sm",
+        "wrap": true,
+        "align": "start",
+        "maxLines" : 3,
+        "margin" : "sm",
+        "color": "#ff0000",
+        "weight":"regular"
+      },
+          {
+        "type": "separator",
+        "margin": "xxl"
+      },
+      
+      
+      
+          {
+            "type": "button",
+            "style": "primary",
+            "action": {
+              "type": "message",
+              "label": "YES",
+              "text": "YES"
+            }
+          },
+          {
+            "type": "button",
+            "style": "secondary",
+            "action": {
+              "type": "message",
+              "label": "No",
+              "text": "No"
+            }
+          },
+          {
+            "type": "button",
+            "style": "secondary",
+            "action": {
+              "type": "message",
+              "label": "Link style button",
+              "text": "Others"
+            }
+          }
+        ]
+      },
+      {
+        "type": "separator",
+        "margin": "xxl"
+      },
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "margin": "md",
+        "contents": [{
+            "type": "text",
+            "text": "generated ",
+            "size": "xxs",
+            "color": "#aaaaaa",
+            "flex": 0
+          },
+          {
+            "type": "text",
+            "text": "2018-09-30 10:53:31 (8.3s)",
+            "color": "#aaaaaa",
+            "size": "xxs",
+            "align": "end"
+          }
+        ]
+      }
+    ]
+  }
+}
+"""
