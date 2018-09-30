@@ -103,8 +103,9 @@ def dbListAllByUserForJSON(userId):
 def dbAddbyUser(param):
 	#print (param['userid'])
 	con=dbConn()
-	sqlStr = "INSERT INTO stocks (userid, type, fid, criteria) VALUES ('{0}', '{1}', '{2}', '{3}')".format(
-				param['userid'], param['type'], param['fid'], param['criteria'])
+	sqlStr = "INSERT INTO stocks (userid, type, fid, fidtxt, criteria) VALUES ('{userid}', '{type}', '{fid}', '{fidtxt}','{criteria}')".format(
+				userid=param['userid'], type=param['type'], fid=param['fid'], fidtxt=param['fidtxt'],
+				criteria=param['criteria'])
 	print ('Sql = ', sqlStr)
 	ck=dbCheckExist(param)
 

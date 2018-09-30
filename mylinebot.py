@@ -96,23 +96,44 @@ stockAddress = 'cnwang406@gmail.com'
 #pDate=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 def processModifyStock(event, username):
-  reStr=r'[+-](.*),(.*)'
-
+  reStrStk=r'([+-])(\d{4}),(.*)'
+  reStrXrate=r'([+-])(...),(.*)'
   s=event.message.text.upper()
+
+  #regex is not familiar. So use dumb method.
   if s.find(',')==-1 :
     s +=',*'
-  m = re.finditer(reStr, s, re.MULTILINE)
+  if (s[0] !='+' and s[1]!='-') :
+    s='+'+s
+
+  if (re.findall(reStrStk, s)):  
+    m=re.findall(reStrStk, s)
+    if (m[0][0]=='+'):
+      msg = '增加/修改 '
+    else:
+      msg = '刪除 '
+    msg += '股票 {0},{1}'.format(m[0][1],m[0][2]) 
+
+  elif re.findall(reStrXrate, s):
+    if (m[0][0]=='+'):
+      msg = '增加/修改 '
+    else:
+      msg = '刪除 '
+    m=re.findall(reStrStk, s)
+    msg +='匯率 {0},{1}'.format(m[0][1],m[0][2]) 
+
+  else :
+    msg = 'sorry, {0} 看不出是股票還是貨幣'.format(s)
   print ('re--',s)
-  for mn,ms in enumerate(m):
-    stockCode=str(ms.groups(0)[0])
-    stockCriteria=str(ms.groups(0)[1])
-    print ('re reult=group({0}), {1}'.format(mn, ms.groups(0)))
-  if s[0] == '+':
-    msg='add {0} with criteria {1}'.format(stockCode,stockCriteria)
-  elif s[0]=='-':
-    msg='remove {0} with criteria {1}'.format(stockCode,stockCriteria)
-  else:
-    msg='{0} with criteria {1}'.format(stockCode,stockCriteria)
+  print (msg)
+
+  """
+  addStk= dict(
+  userid = event.userid,
+  type = 's',
+  fid = '2308',
+  criteria ='<120')
+  """
   line_bot_api.reply_message(event.reply_token, TextSendMessage(msg)) 
 
 def processStock(event, username):

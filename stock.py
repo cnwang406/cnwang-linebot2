@@ -58,8 +58,6 @@ def getXrate(xrate):
 			xd[2]='---'
 
 
-
-
 def getXrateById(xrateId):
 	url='https://rate.bot.com.tw/xrt?Lang=zh-TW'
 	context = ssl._create_unverified_context()
@@ -143,3 +141,5 @@ def getPrice(par):
 	getXrate(par)
 	getStock(par)	
 	print (par)
+
+getXrateNameInit()
