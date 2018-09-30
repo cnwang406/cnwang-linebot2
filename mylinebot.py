@@ -4,14 +4,14 @@ TITLE=(
 """
 ***************************************************
 **                                               **
-**      Line Bot  V0.28                          **
+**      Line Bot  V0.29                          **
 **                cnwang. 2018/09                **
 ***************************************************
 
 """
 )  
 
-VERSION = 0.28
+VERSION = 0.29
 
 import json
 from flask import Flask,  abort

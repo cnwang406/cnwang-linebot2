@@ -73,7 +73,7 @@ def getXrate(xrate):
 			xd[1]='---'
 			xd[2]='---'
 			xd[3]='---'
-			xd[4]=''
+			xd[4]='---'
 
 
 def getXrateById(xrateId):
@@ -159,4 +159,3 @@ def getPrice(par):
 	getXrate(par)
 	getStock(par)	
 	print (par)
-	
