@@ -1,17 +1,18 @@
 # -*- coding: UTF-8 -*-
+VERSION = '0.30'
 
 TITLE=(
 """
 ***************************************************
 **                                               **
-**      Line Bot  V0.29                          **
+**      Line Bot  V{VERSION}                          **
 **                cnwang. 2018/09                **
 ***************************************************
 
-"""
-)  
+""".format(VERSION=VERSION)
+)
 
-VERSION = 0.29
+
 
 import json
 from flask import Flask,  abort
@@ -191,10 +192,10 @@ def getUserName(event):
 
 
 
-welcomeStr='\
-***********************\n\
-  小汪汪	          \n\
-************* V'+str(VERSION)+ ' ***'
+welcomeStr=("""
+***********************
+  小汪汪	          
+************* V{VERSION} ***""".format(VERSION=VERSION))
 
 
 line_bot_api.push_message(lineUid, TextSendMessage(welcomeStr))
