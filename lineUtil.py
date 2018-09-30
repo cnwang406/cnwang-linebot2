@@ -65,7 +65,7 @@ def generateStockJSON(n0,n1,n2,par,startTime):
                     "text": "dollars",
                     "size": "sm",
                     "color": "#111111",
-                    "flex": 2
+                    "flex": 4
                   },
                   {
                     "type": "text",
@@ -73,7 +73,7 @@ def generateStockJSON(n0,n1,n2,par,startTime):
                     "size": "sm",
                     "color": "#111111",
                     "align": "end",
-                    "flex": 1
+                    "flex": 3
                   },
                   {
                     "type": "text",
@@ -81,7 +81,7 @@ def generateStockJSON(n0,n1,n2,par,startTime):
                     "size": "sm",
                     "color": "#111111",
                     "align": "end",
-                    "flex": 1
+                    "flex": 3
                   },
                   {
                     "type": "text",
@@ -89,7 +89,7 @@ def generateStockJSON(n0,n1,n2,par,startTime):
                     "size": "xxs",
                     "color": "#111111",
                     "align": "end",
-                    "flex": 2
+                    "flex": 4
                   }
                 ]
               },
@@ -106,14 +106,14 @@ def generateStockJSON(n0,n1,n2,par,startTime):
                   "text": "{XID}",
                   "size": "sm",
                   "color": "#555555",
-                  "flex": 1
+                  "flex": 2
                 },
                 {
                   "type": "text",
                   "text": "{XIDTXT}",
                   "size": "sm",
                   "color": "#555555",
-                  "flex": 1
+                  "flex": 2
                 },
                 {
                   "type": "text",
@@ -121,7 +121,7 @@ def generateStockJSON(n0,n1,n2,par,startTime):
                   "size": "sm",
                   "color": "#111111",
                   "align": "end",
-                  "flex":1
+                  "flex":3
                 },
                 {
                   "type": "text",
@@ -129,7 +129,7 @@ def generateStockJSON(n0,n1,n2,par,startTime):
                   "size": "sm",
                   "color": "#111111",
                   "align": "end",
-                  "flex":1
+                  "flex":3
                 },
                 {
                   "type": "text",
@@ -137,7 +137,7 @@ def generateStockJSON(n0,n1,n2,par,startTime):
                   "size": "xxs",
                   "color": "#111111",
                   "align": "end",
-                  "flex":2
+                  "flex":4
                 }
               ]
             }
