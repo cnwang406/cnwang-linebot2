@@ -145,9 +145,13 @@ def dbCheckExist(param):
 	cur = con.cursor()
 	cur.execute(sqlStr)
 	ver=cur.fetchone()
+	print (ver)
 	con.close() 
+	if (len(ver)==0) :
+		return None
+	else:
+		return ver[0]
 
-	return ver
 	
 
 #print (dbListAllByUser('U769b97b52c66fec77eb598a6223f30a3'))
