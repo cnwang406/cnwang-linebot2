@@ -115,7 +115,7 @@ def processModifyStock(event, username):
     msg += '股票 {0},{1}'.format(m[0][1],m[0][2]) 
 
   elif re.findall(reStrXrate, s):
-    if (m[0][0]=='+'):
+    if (m[0][0]=='+'):`
       msg = '增加/修改 '
     else:
       msg = '刪除 '
