@@ -2,7 +2,7 @@
 import time
 from blynkutil import (blynkGetPinValue, blynkGetPinHistoryValue)
 import datetime
-from modeldb import (dbListAllByUser, dbAddbyUser, dbRemoveByUser,dbCheckExist)
+from modeldb import (dbListAllByUser, dbAddByUser, dbRemoveByUser,dbCheckExist)
 from stock import (getXrateById, getStockById,getXrateName, getStockName)
 
 RED='AA0000'
@@ -1076,11 +1076,18 @@ def updateStock(paramStk):
 
   if (fidExist) :
     print ('#{2}, {0} ({1}) exist'.format(paramStk['fid'],paramStk['fidtxt'], paramStk['id']))
+    if paramStk['action']=='+':
+      print ('UPDATE')
+      dbAddByUser(paramStk)
+    else :
+      print ('REMOVE')
+      dbRemoveByUser(paramStk)
   else:
     print ('{0} ({1}) non-exist'.format(paramStk['fid'],paramStk['fidtxt']))
+    if paramStk['action']=='+':
+      print ('ADD')
+      dbAddByUser(paramStk)
+    else:
+      print ('CANNOT REMOVE.')
 
-  if paramStk['action']=='+':   # update or add
-    dbAddbyUser(paramStk)
-  else :                        # remove
-    dbRemoveByUser(paramStk)
-
+    

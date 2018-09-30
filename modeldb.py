@@ -100,11 +100,10 @@ def dbListAllByUserForJSON(userId):
 	return output
 
 
-def dbAddbyUser(param):
+def dbAddByUser(param):
 	#print (param['userid'])
 	con=dbConn()
 	ck=dbCheckExist(param)
-	print ('add Sql = ', sqlStr)
 	
 	if (not ck) :
 		sqlStr = "INSERT INTO stocks (userid, type, fid, fidtxt, criteria) VALUES ('{userid}', '{type}', '{fid}', '{fidtxt}','{criteria}')".format(
