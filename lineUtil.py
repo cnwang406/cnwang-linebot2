@@ -2,8 +2,8 @@
 import time
 from blynkutil import (blynkGetPinValue, blynkGetPinHistoryValue)
 import datetime
-from modeldb import (dbListAllByUser, dbAddbyUser, dbCheckExist)
-from stock import (getXrateById, getStockById,getXrateName, getXrateName)
+from modeldb import (dbListAllByUser, dbAddbyUser, dbRemoveByUser,dbCheckExist)
+from stock import (getXrateById, getStockById,getXrateName, getStockName)
 
 RED='AA0000'
 GREEN='00AA01'  
@@ -79,7 +79,6 @@ def generateStockJSON(n0,n1,n2,par,startTime):
                     "type": "text",
                     "text": "sell",
                     "size": "sm",
-                    "color": "#111111",
                     "align": "end",
                     "flex": 3
                   },
@@ -1056,5 +1055,32 @@ def generateHelpJSON(startTime):
   output = s.replace('{timestamp}',datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")+' ('+str(round(time.time()- startTime,1))+'s)')
   return output
 
-def updateStock(param):
-  pass
+def updateStock(paramStk):
+  """
+    paramStk = dict(
+    userid=event.source.user_id,
+    type = 's',
+    fid='',
+    criteria='',
+    fidtxt='',
+    action='')
+  """
+
+  if paramStk['type']=='s':
+    paramStk['fidtxt']=getStockName(paramStk['fid'])
+  else:
+    paramStk['fidtxt']=getXrateName(paramStk['fid'])
+  
+  #check if exist
+  fidExist = dbCheckExist(paramStk)
+
+  if (fidExist) :
+    print ('#{2}, {0} ({1}) exist'.format(paramStk['fid'],paramStk['fidtxt'], paramStk['id']))
+  else:
+    print ('{0} ({1}) non-exist'.format(paramStk['fid'],paramStk['fidtxt']))
+
+  if paramStk['action']=='+':   # update or add
+    dbAddbyUser(paramStk)
+  else :                        # remove
+    dbRemoveByUser(paramStk)
+
